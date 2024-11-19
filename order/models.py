@@ -9,7 +9,6 @@ def validate_delivery_date(value):
 
 # Create your models here.
 class Order(models.Model):
-    id = models.BigAutoField(primary_key=True)
     email = models.EmailField(max_length=125)
     total = models.DecimalField(
         max_digits=10,
