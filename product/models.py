@@ -15,4 +15,4 @@ class Product(models.Model):
 
     # Comprobar que va bien este formato para mostrar el nombre
     def __str__(self):
-        return f'Producto: {self.nombre}'
+        return f'Producto: {self.name}'
