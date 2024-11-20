@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDB Electronics - Inicio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        nav ul li {
+            display: inline;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover {
+            color: #ffcc00;
+        }
+        main {
+            padding: 20px;
+        }
+        #bienvenida {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 50px;
+            background: #007bff;
+            color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+            position: relative;
+        }
+        #bienvenida .top-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #bienvenida .login-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 5px;
+        }
+        #bienvenida h2 {
+            font-size: 2em;
+            width: 67%;
+            margin: 0;
+            text-align: left;
+        }
+        #bienvenida p {
+            margin-top: 10px;
+            font-size: 1.2em;
+        }
+        #bienvenida a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #ffcc00;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            transition: background 0.3s, color 0.3s;
+        }
+        #bienvenida a:hover {
+            background: #ffcc00;
+            color: #007bff;
+        }
+        #bienvenida .actions {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        #bienvenida .actions .login-button {
+            color: #007bff;
+            background: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            border: 2px solid #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background 0.3s, color 0.3s;
+        }
+        #bienvenida .actions .login-button:hover {
+            background: #007bff;
+            color: #fff;
+        }
+        #departamentos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .nuestros-departamentos{
+            text-align: center;
+            font-size: 3em;
+        }
+        .departamento {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .departamento h4 {
+            color: #007bff;
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .departamento p {
+            font-size: 1em;
+            color: #555;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>EDB ELECTRONICS</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Cocina</a></li>
+                <li><a href="#">Lavandería</a></li>
+                <li><a href="#">Iluminación</a></li>
+                <li><a href="#">Limpieza</a></li>
+                <li><a href="#">Mi Cuenta</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="bienvenida">
+            <div class="top-container">
+                <h2>Nuestra empresa de venta de electrodomésticos ahora también online</h2>
+                <div class="login-container">
+                    <a class="login-button" href="/account/login">Iniciar sesión</a>
+                    <a class="login-button" href="/account/register">Registrarse</a>
+                </div>
+            </div>
+            <div class="actions">
+                <p>¡No te lo puedes perder!</p>
+                <a href="/tienda">Ir a los productos</a>
+            </div>
+        </section>
+        <h3 class="nuestros-departamentos">Nuestros departamentos</h3>
+        <section id="departamentos">
+          {% for department in departments %}
+            <a href="/tienda/{{ department.department }}" style="text-decoration: none; color: inherit;">
+                <div class="departamento">
+                    <h4><i class="{{ department.icon }}"></i> {{ department.department }}</h4>
+                    <p>{{ department.description }}</p>
+                </div>
+            </a>
+          {% endfor %}
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 EDB Electronics. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>
