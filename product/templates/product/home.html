@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,65 +8,133 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="script" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-    <link rel="stylesheet" href="{% static 'home.css' %}">
 </head>
 
 <body>
     <header>
-        <nav class="d-flex justify-content-between px-4">
+        <nav class="d-flex justify-content-between px-4 py-3 bg-dark">
             <a href="/">
-                <button class="p-2">
+                <button class="btn btn-light p-2">
                     <i class="fa-solid fa-house"></i> EDB
                 </button>
             </a>
             <section class="d-flex">
-                <select name="all-departments">
-                    <option value="all-departments" selected disabled>Todos los departamentos</option>
+                <select class="form-select rounded-end-0" onchange="updateURLWithDepartment(this)">
                     {% for department in departments %}
-                        <option value="{{ department.id }}">{{ department.department }}</option>
+                    {% if department.name == "Todos los departamentos" %}
+                    <option value="{{ department.name }}" selected>{{ department.name }}</option>
+                    {% else %}
+                    <option value="{{ department.name }}">{{ department.name }}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
-                <input type="text">
+                <div class="input-group">
+                    <input type="text" id="searchInput" class="form-control rounded-start-0"
+                        placeholder="Buscar productos..." onkeypress="handleSearch(event)">
+                    <button class="btn btn-light border-start"
+                        onclick="handleSearch({ key: 'Enter', target: document.getElementById('searchInput') })">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
             </section>
-            <section class="d-flex">
+            <section class="d-flex gap-1">
                 <a href="/cart">
-                    <button class="p-2">
+                    <button class="btn btn-light p-2">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                 </a>
                 <a href="/profile">
-                    <button class="p-2">
+                    <button class="btn btn-light p-2">
                         <i class="fa-solid fa-user"></i>
                     </button>
                 </a>
             </section>
         </nav>
+        <section class="d-flex w-100 bg-white border-bottom">
+            {% for category in categories %}
+            <button class="bg-white border-0" onclick="updateURLWithCategory('{{ category.name }}')">
+                <div class="d-flex align-items-center gap-2 py-2 px-3 border-end">
+                    <i class="{{ category.icon }}"></i>
+                    <p class="m-0">{{ category.name }}</p>
+                </div>
+            </button>
+            {% endfor %}
+        </section>
     </header>
-    <main>
-        <section class="d-flex w-100 py-2 bg-white">
-            {% for department in departments %}
-            <a href="/product/{{ department.department }}" class="text-decoration-none">
-                <div class="d-flex align-items-center gap-2">
-                    <i class="{{ department.icon }}"></i>
-                    <p>{{ department.department }}</p>
+    <main class="min-vh-100 p-0">
+        <div class="container py-4">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for product in products %}
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="{{ product.image }}" alt="{{ product.name }}" width="180" height="180"
+                            class="card-img-top object-fit-contain">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text"><strong>{{ product.price }}€</strong></p>
+                        </div>
+                    </div>
                 </div>
-            </a>
-          {% endfor %}
-        </section>
-        <h3 class="nuestros-departamentos">Nuestros departamentos</h3>
-        <section id="departamentos">
-          {% for department in departments %}
-            <a href="/tienda/{{ department.department }}" style="text-decoration: none; color: inherit;">
-                <div class="departamento">
-                    <h5><i class="{{ department.icon }}"></i> {{ department.department }}</h5>
-                </div>
-            </a>
-          {% endfor %}
-        </section>
+                {% endfor %}
+            </div>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2023 EDB Electronics. Todos los derechos reservados.</p>
+        <p class="bg-dark text-white my-0 py-3 text-center">&copy; 2023 EDB Electronics. Todos los derechos reservados.
+        </p>
     </footer>
+    <script>
+        function updateURLWithDepartment(selectElement) {
+            const departmentName = selectElement.value;
+            if (departmentName) {
+                const url = new URL(window.location.href);
+                url.searchParams.set('department', departmentName);
+                window.location.href = url.toString();
+            }
+        }
+
+        function updateURLWithCategory(categoryName) {
+            if (categoryName) {
+                const url = new URL(window.location.href);
+                url.searchParams.set('category', categoryName);
+                window.location.href = url.toString();
+            }
+        }
+
+        function handleSearch(event) {
+            if (event.key === 'Enter') {
+                const searchQuery = event.target.value;
+                const url = new URL(window.location.href);
+                url.searchParams.set('search', searchQuery);
+                window.location.href = url.toString();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const department = urlParams.get('department');
+            if (department) {
+                const selectElement = document.querySelector('.form-select');
+                selectElement.value = department;
+            }
+
+            const category = urlParams.get('category');
+            if (category) {
+                const categoryLinks = document.querySelectorAll('a[onclick^="updateURLWithCategory"]');
+                categoryLinks.forEach(link => {
+                    if (link.textContent.trim() === category) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+
+            const searchQuery = urlParams.get('search');
+            if (searchQuery) {
+                document.getElementById('searchInput').value = searchQuery;
+            }
+        });
+    </script>
 </body>
 
 </html>
