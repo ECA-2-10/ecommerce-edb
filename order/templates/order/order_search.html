@@ -19,6 +19,7 @@
             </ul>
         </nav>
     </header>
+
     <main>
         <section id="search-order">
             <h2>Busca tu pedido</h2>
@@ -35,27 +36,35 @@
         {% if order %}
         <section id="order-details">
             <h3>Detalles del pedido</h3>
-            <p><strong>Código:</strong> {{ order.code }}</p>
-            <p><strong>Email:</strong> {{ order.email }}</p>
-            <p><strong>Total:</strong> {{ order.total }}€</p>
-            <p><strong>Dirección:</strong> {{ order.address }}</p>
-            <p><strong>Método de pago:</strong> {{ order.get_paymentMethod_display }}</p>
-            <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
-            <p><strong>Entregado:</strong> {{ order.delivered|yesno:"Sí,No" }}</p>
+            <div id="order-status" class="{% if order.delivered %}delivered-true{% else %}delivered-false{% endif %}">
+                <div id="order-status-bar" style="width: {% if order.delivered %} 100% {% else %} 50% {% endif %};"></div>
+                <div id="order-status-text">{% if order.delivered %}Entregado{% else %}En camino{% endif %}</div>
+            </div>
+            <div id="order-details-table">
+                <div><span>Código:</span> {{ order.code }}</div>
+                <div><span>Email:</span> {{ order.email }}</div>
+                <div><span>Dirección:</span> {{ order.address }}</div>
+                <div><span>Método de pago:</span> {{ order.get_paymentMethod_display }}</div>
+                <div><span>Fecha de entrega:</span> {{ order.deliveryDate }}</div>
+                <div><span>Total:</span> €{{ order.total }}</div>
+            </div>
+
 
             <h3>Productos</h3>
-            <ul>
+            <div id="product-list">
                 {% for order_product in order_products %}
-                <li>
-                    <strong>Nombre:</strong> {{ order_product.product.name }}<br>
-                    <strong>Cantidad:</strong> {{ order_product.quantity }}<br>
-                    <strong>Precio:</strong> {{ order_product.product.price }}€
-                </li>
+                <div class="product-item">
+                    <img src="{{ order_product.product.image.url }}" alt="{{ order_product.product.name }}">
+                    <h4>{{ order_product.product.name }}</h4>
+                    <p class="product-quantity">Cantidad: {{ order_product.quantity }}</p>
+                    <p>Precio: €{{ order_product.product.price }}</p>
+                </div>
                 {% endfor %}
-            </ul>
+            </div>
         </section>
         {% endif %}
     </main>
+
     <footer>
         <p>&copy; 2023 EDB Electronics. Todos los derechos reservados.</p>
     </footer>

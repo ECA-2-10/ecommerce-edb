@@ -110,6 +110,23 @@ main {
     margin: 8px 0;
 }
 
+#order-details-table {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#order-details-table div {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#order-details-table div span {
+    font-weight: bold;
+}
+
 #order-status {
     background: #e0e0e0;
     border-radius: 10px;
@@ -121,7 +138,11 @@ main {
 #order-status-bar {
     height: 20px;
     background: #28a745;
-    width: 60%;
+    width: 50%; /* Default to 50% */
+}
+
+.delivered-true #order-status-bar {
+    width: 100%; /* If delivered is true */
 }
 
 #order-status-text {
@@ -133,9 +154,17 @@ main {
     color: #333;
 }
 
+.delivered-true #order-status-text {
+    content: 'Entregado';
+}
+
+.delivered-false #order-status-text {
+    content: 'En camino';
+}
+
 #product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
     gap: 15px;
 }
 
@@ -163,6 +192,11 @@ main {
 .product-item p {
     font-size: 1em;
     margin: 5px 0;
+}
+
+.product-item .product-quantity {
+    font-weight: bold;
+    margin-bottom: 10px;
 }
 
 footer {

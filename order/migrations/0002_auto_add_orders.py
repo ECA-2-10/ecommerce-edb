@@ -91,7 +91,8 @@ def add_initial_orders(apps, schema_editor):
             "total": 169.98,
             "address": "707 Pine Lane",
             "paymentMethod": "OD",
-            "deliveryDate": now().date() + timedelta(days=9),
+            "deliveryDate": now().date(),
+            "delivered": True
         },[(20,1),(28,1)])
     ]
 
