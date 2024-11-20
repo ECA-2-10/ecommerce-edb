@@ -54,7 +54,7 @@ main {
     justify-content: space-between;
     align-items: center;
 }
-#bienvenida .login-container {
+#bienvenida .container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 5px;
