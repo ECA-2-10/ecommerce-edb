@@ -6,6 +6,8 @@ from django.core.validators import MinValueValidator
 class Category(models.Model):
     department = models.CharField(max_length=255)
     section = models.CharField(max_length=255)
+    description = models.TextField()
+    icon = models.CharField(max_length=50, default='fas fa-utensils')
 
     def __str__(self):
         return f'{self.department}, {self.section}'
