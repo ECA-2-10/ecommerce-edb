@@ -1,0 +1,64 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDB Electronics - Buscar Pedido</title>
+    <link rel="stylesheet" href="{% static 'order.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>EDB ELECTRONICS</h1>
+        <nav>
+            <ul>
+                <li><a href="/">Inicio</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="search-order">
+            <h2>Busca tu pedido</h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" id="order_code" name="order_code" placeholder="Ingresa el código de tu pedido" required>
+                <button type="submit">Buscar</button>
+            </form>
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+        </section>
+
+        {% if order %}
+        <section id="order-details">
+            <h3>Detalles del pedido</h3>
+            <p><strong>Código:</strong> {{ order.code }}</p>
+            <p><strong>Email:</strong> {{ order.email }}</p>
+            <p><strong>Total:</strong> {{ order.total }}€</p>
+            <p><strong>Dirección:</strong> {{ order.address }}</p>
+            <p><strong>Método de pago:</strong> {{ order.get_paymentMethod_display }}</p>
+            <p><strong>Fecha de entrega:</strong> {{ order.deliveryDate }}</p>
+            <p><strong>Entregado:</strong> {{ order.delivered|yesno:"Sí,No" }}</p>
+
+            <h3>Productos</h3>
+            <ul>
+                {% for order_product in order_products %}
+                <li>
+                    <strong>Nombre:</strong> {{ order_product.product.name }}<br>
+                    <strong>Cantidad:</strong> {{ order_product.quantity }}<br>
+                    <strong>Precio:</strong> {{ order_product.product.price }}€
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+    </main>
+    <footer>
+        <p>&copy; 2023 EDB Electronics. Todos los derechos reservados.</p>
+    </footer>
+</body>
+
+</html>

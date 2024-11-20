@@ -2,7 +2,6 @@ from django.db import models
 from django.core.validators import MinValueValidator
 from django.core.exceptions import ValidationError  
 from django.utils.timezone import now 
-from account.models import CustomUser
 from product.models import Product
 
 def validate_delivery_date(value):
@@ -11,6 +10,7 @@ def validate_delivery_date(value):
 
 # Create your models here.
 class Order(models.Model):
+    code = models.CharField(max_length=10, unique=True, editable=False)
     email = models.EmailField(max_length=125)
     total = models.DecimalField(
         max_digits=10,
@@ -32,7 +32,6 @@ class Order(models.Model):
         default=ON_DELIVERY
     )
     deliveryDate = models.DateField(validators=[validate_delivery_date])
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='orders', null=True, blank=True)
 
     def __str__(self):
         return f'Pedido {self.id} - {self.email}'
