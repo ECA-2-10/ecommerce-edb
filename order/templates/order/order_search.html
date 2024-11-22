@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% block title %}Registro - EDB Electronics{% endblock %}
+
+{% block content %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -11,17 +15,10 @@
 </head>
 
 <body>
-    <header>
-        <h1>EDB ELECTRONICS</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Inicio</a></li>
-            </ul>
-        </nav>
-    </header>
+    
 
-    <main>
-        <section id="search-order">
+    <main >
+        <section id="search-order" >
             <h2>Busca tu pedido</h2>
             <form method="post">
                 {% csrf_token %}
@@ -65,9 +62,8 @@
         {% endif %}
     </main>
 
-    <footer>
-        <p>&copy; 2024 EDB Electronics. Todos los derechos reservados.</p>
-    </footer>
+
 </body>
 
 </html>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base-better.html" %}
+
+{% block content %}
+    <div class="position-relative">
+        <button class="scroll-button left" id="scrollLeft" onclick="scrollCategories(-200)" aria-label="Desplazar a la izquierda">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <div class="categories-container" id="categoriesContainer">
+            {% for category in categories %}
+            <button class="btn btn-outline-secondary mx-1 category-button" data-department="{{ category.department.name }}" onclick="filterProductsByCategory('{{ category.name }}')" aria-label="Categoría {{ category.name }}">
+                <div class="d-flex align-items-center gap-2 py-2 px-3">
+                    <i class="{{ category.icon }}"></i>
+                    <p class="m-0">{{ category.name }}</p>
+                </div>
+            </button>
+            {% endfor %}
+        </div>
+        <button class="scroll-button right" id="scrollRight" onclick="scrollCategories(200)" aria-label="Desplazar a la derecha">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+    </div>
+    
+    <!-- <div id="productsContainer">
+        {% for product in products %}
+        <div data-category="{{ product.category.name }}" data-department="{{ product.category.department.name }}" data-name="{{ product.name }}">
+            <div>
+                <img src="{{ product.image }}" alt="{{ product.name }}" >
+                <div>
+                    <h5>{{ product.name }}</h5>
+                    <p>{{ product.description }}</p>
+                    <p><strong>{{ product.price }}€</strong></p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div> -->
+{% endblock %}

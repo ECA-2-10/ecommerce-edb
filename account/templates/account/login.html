@@ -1,5 +1,8 @@
+{% extends 'base.html' %}
 {% load static %}
+{% block title %}Iniciar Sesión - EDB Electronics{% endblock %}
 
+{% block content %}
 <!DOCTYPE html>
 <html lang="es">
 
@@ -8,17 +11,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDB Electronics - Iniciar Sesión</title>
     <link rel="stylesheet" href="{% static 'account.css' %}">
+
 </head>
 
 <body>
-    <header>
-        <h1>EDB ELECTRONICS</h1>
-        <nav>
-            <ul>
-                <li><a href="/">Inicio</a></li>
-            </ul>
-        </nav>
-    </header>
 
     <main>
         <section id="container">
@@ -53,9 +49,7 @@
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 EDB Electronics. Todos los derechos reservados.</p>
-    </footer>
 </body>
 
 </html>
+{% endblock %}

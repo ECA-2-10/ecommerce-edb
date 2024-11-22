@@ -1,21 +1,16 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f4f4;
-    margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: #2e3b4e;
-    color: #fff;
-    padding: 15px;
-    text-align: center;
-}
-
-header h1 {
-    margin: 0;
-    font-size: 2em;
-}
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+        
+}   
 
 nav ul {
     list-style: none;
@@ -39,9 +34,12 @@ nav ul li a:hover {
 }
 
 main {
+    flex: 1;
     padding: 20px;
     max-width: 1200px;
-    margin: 0 auto;
+    width: 100%;
+    margin: 40px auto;
+    
 }
 
 #search-order {
