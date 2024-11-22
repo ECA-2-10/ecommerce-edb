@@ -28,4 +28,4 @@ def product_list(request):
         'departments': departments,
     }
     
-    return render(request, 'product/home.html', context)
+    return render(request, 'product/home-better.html', context)

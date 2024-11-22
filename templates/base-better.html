@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{% static 'home-better.css' %}">
     <!-- Custom JS -->
     <script src="{% static 'js/home.js' %}" defer></script>
+    {% block extra_css %}
+    {% endblock %}
 </head>
 <body>
     <header>
@@ -45,9 +47,14 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                 </a>
-                <a href="/profile">
+                <a href="{% if user.is_authenticated %}/account/logout{% else %}/account/login{% endif %}">
                     <button class="btn btn-light p-2" aria-label="Perfil">
                         <i class="fa-solid fa-user"></i>
+                        {% if user.is_authenticated %}
+                            Cerrar sesión
+                        {% else %}
+                            Iniciar sesión
+                        {% endif %}
                     </button>
                 </a>
             </section>

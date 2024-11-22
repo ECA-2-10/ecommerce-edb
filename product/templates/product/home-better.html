@@ -20,18 +20,22 @@
         </button>
     </div>
     
-    <!-- <div id="productsContainer">
+    <div id="productsContainer">
         {% for product in products %}
-        <div data-category="{{ product.category.name }}" data-department="{{ product.category.department.name }}" data-name="{{ product.name }}">
-            <div>
-                <img src="{{ product.image }}" alt="{{ product.name }}" >
-                <div>
-                    <h5>{{ product.name }}</h5>
-                    <p>{{ product.description }}</p>
+        <div class="product-card" data-category="{{ product.category.name }}" data-department="{{ product.category.department.name }}" data-name="{{ product.name }}">
+            <div class="product-image">
+                <img src="{{ product.image }}" alt="{{ product.name }}">
+            </div>
+            <div class="product-info">
+                <h5>{{ product.name }}</h5>
+                <p>{{ product.description }}</p>
+                <div class="price-stock">
                     <p><strong>{{ product.price }}€</strong></p>
+                    <p>Quedan: {{ product.stock }}</p>
                 </div>
             </div>
         </div>
         {% endfor %}
-    </div> -->
+    </div>
+    
 {% endblock %}
