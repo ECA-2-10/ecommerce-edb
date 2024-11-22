@@ -2,8 +2,8 @@
 
 from django.db import migrations
 
-def add_icons_to_categories(apps, schema_editor):
-    Category = apps.get_model('product', 'Category')
+def add_icons_to_departments(apps, schema_editor):
+    Department = apps.get_model('product', 'Department')
     department_icons = {
         'Cocina': 'fas fa-utensils',
         'Electrónica': 'fas fa-tv',
@@ -17,9 +17,9 @@ def add_icons_to_categories(apps, schema_editor):
         'Salud': 'fas fa-heartbeat',
     }
 
-    for department, icon in department_icons.items():
-        categories = Category.objects.filter(department=department)
-        categories.update(icon=icon)
+    for name_department, icon in department_icons.items():
+        department = Department.objects.filter(name=name_department)
+        department.update(icon=icon)
 
 class Migration(migrations.Migration):
 
@@ -28,5 +28,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(add_icons_to_categories),
+        migrations.RunPython(add_icons_to_departments),
     ]
