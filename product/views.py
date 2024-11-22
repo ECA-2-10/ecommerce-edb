@@ -14,7 +14,7 @@ def product_list(request):
         products = products.filter(category__name=category_name)
     
     if department_name and department_name != "Todos los departamentos":
-        products = products.filter(department__name=department_name)
+        products = products.filter(category__department__name=department_name)
     
     if search_query:
         products = products.filter(name__icontains=search_query)
