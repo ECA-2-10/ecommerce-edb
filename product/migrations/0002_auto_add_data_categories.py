@@ -5,25 +5,27 @@ from django.db import migrations
 def add_initial_categories(apps, schema_editor):
     # Add initial product/images to the database
     Category = apps.get_model('product', 'Category')
+    Department = apps.get_model('product', 'Department')
 
     # Departamento, secciones del departamento:
     new_departments_sections = {
-        'Cocina': (['Electrodomesticos', 'Utensilios de Cocina', 'Pequeños Electrodomésticos', 'Almacenamiento de Alimentos', 'Otros'],'Equipamiento esencial para una cocina moderna.'),
-        'Electrónica': (['Audio y Sonido', 'Televisores y Video'],'Gadgets y dispositivos de última tecnología.'),
-        'Hogar': (['Muebles', 'Decoración'],'Muebles y accesorios para embellecer tu hogar.'),
-        'Jardinería': (['Herramientas de Jardín', 'Plantas y Semillas'],'Herramientas y plantas para tu jardín perfecto.'),
-        'Ropa': (['Hombre', 'Mujer'],'Moda actual para hombres y mujeres elegantes.'),
-        'Deportes': (['Fitness', 'Outdoor'],'Equipamiento para mantenerte activo y saludable.'),
-        'Belleza': (['Cuidado de la Piel', 'Maquillaje'],'Productos para realzar tu belleza natural.'),
-        'Juguetes': (['Niños', 'Educativos'],'Diversión educativa para niños de todas las edades.'),
-        'Oficina': (['Equipos de Oficina', 'Suministros'],'Suministros y equipos para un espacio eficiente.'),
-        'Salud': (['Medicamentos', 'Equipos Médicos'],'Productos y equipos para tu bienestar diario.')
+        'Cocina': ['Electrodomesticos', 'Utensilios de Cocina', 'Pequeños Electrodomésticos', 'Almacenamiento de Alimentos', 'Otros'],
+        'Electrónica': ['Audio y Sonido', 'Televisores y Video'],
+        'Hogar': ['Muebles', 'Decoración'],
+        'Jardinería': ['Herramientas de Jardín', 'Plantas y Semillas'],
+        'Ropa': ['Hombre', 'Mujer'],
+        'Deportes': ['Fitness', 'Outdoor'],
+        'Belleza': ['Cuidado de la Piel', 'Maquillaje'],
+        'Juguetes': ['Niños', 'Educativos'],
+        'Oficina': ['Equipos de Oficina', 'Suministros'],
+        'Salud': ['Medicamentos', 'Equipos Médicos']
     }
 
     # Iterar sobre los departamentos y secciones para crear las categorías
-    for department, (sections, description) in new_departments_sections.items():
-        for section in sections:
-            Category.objects.create(department=department, section=section, description=description)
+    for name_department, categories in new_departments_sections.items():
+        department = Department.objects.create(name=name_department)
+        for category in categories:
+            Category.objects.create(name=category, department=department)
 
 
 class Migration(migrations.Migration):

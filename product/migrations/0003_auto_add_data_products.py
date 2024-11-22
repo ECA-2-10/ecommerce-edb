@@ -5,14 +5,18 @@ from django.db import migrations
 def add_initial_products(apps, schema_editor):
     # Add initial product/images to the database
     Product = apps.get_model('product', 'Product')
+    Department = apps.get_model('product', 'Department')
     Category = apps.get_model('product', 'Category')
 
+    # Obtener los departamentos
+    cocina = Department.objects.get(name='Cocina')
+
     # Obtener las categorías
-    electrodomesticos = Category.objects.get(department='Cocina', section='Electrodomesticos')
-    utensilios = Category.objects.get(department='Cocina', section='Utensilios de Cocina')
-    peque_electro = Category.objects.get(department='Cocina', section='Pequeños Electrodomésticos')
-    almacenamiento = Category.objects.get(department='Cocina', section='Almacenamiento de Alimentos')
-    otros = Category.objects.get(department='Cocina', section='Otros')
+    electrodomesticos = Category.objects.get(department=cocina, name='Electrodomesticos')
+    utensilios = Category.objects.get(department=cocina, name='Utensilios de Cocina')
+    peque_electro = Category.objects.get(department=cocina, name='Pequeños Electrodomésticos')
+    almacenamiento = Category.objects.get(department=cocina, name='Almacenamiento de Alimentos')
+    otros = Category.objects.get(department=cocina, name='Otros')
 
     Product.objects.create(
         name='Refrigerador Samsung Family Hub',
