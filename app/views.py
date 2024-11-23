@@ -1,8 +1,5 @@
 from django.shortcuts import render
 
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'home-better.html')
 
-def home_view(request):
-    
-    return render(request, 'home.html', {'is_homepage': True})

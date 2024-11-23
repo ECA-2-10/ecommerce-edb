@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='Order',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('code', models.CharField(editable=False, max_length=10, unique=True)),
+                ('code', models.CharField(max_length=10, unique=True)),
                 ('email', models.EmailField(max_length=125)),
                 ('total', models.DecimalField(decimal_places=2, help_text='El total debe ser un valor positivo.', max_digits=10, validators=[django.core.validators.MinValueValidator(0.01)])),
                 ('address', models.CharField(max_length=255)),

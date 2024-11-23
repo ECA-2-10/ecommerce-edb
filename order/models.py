@@ -10,7 +10,7 @@ def validate_delivery_date(value):
 
 # Create your models here.
 class Order(models.Model):
-    code = models.CharField(max_length=10, unique=True, editable=False)
+    code = models.CharField(max_length=10, unique=True)
     email = models.EmailField(max_length=125)
     total = models.DecimalField(
         max_digits=10,

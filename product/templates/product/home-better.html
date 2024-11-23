@@ -19,7 +19,22 @@
             <i class="fas fa-chevron-right"></i>
         </button>
     </div>
-    
+    {% if messages %}
+        <div id="messages">
+            {% for message in messages %}
+                <div class="message"> {{ message }}</div>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(() => {
+                const messages = document.getElementById('messages');
+                if (messages) {
+                    messages.style.opacity = 0;
+                    setTimeout(() => messages.remove(), 500);
+                }
+            }, 5000);
+        </script>
+    {% endif %}
     <div id="productsContainer">
         {% for product in products %}
         <div class="product-card" data-category="{{ product.category.name }}" data-department="{{ product.category.department.name }}" data-name="{{ product.name }}">
@@ -31,11 +46,17 @@
                 <p>{{ product.description }}</p>
                 <div class="price-stock">
                     <p><strong>{{ product.price }}€</strong></p>
-                    <p>Quedan: {{ product.stock }}</p>
+                    {% if product.soldout %}
+                        <p>Agotado</p>
+                    {% else %}
+                        <form method="get" onsubmit="location.href='/cart/add-amount/{{ product.id }}/' + this.amount.value + '/'; return false;">
+                            <input type="number" name="amount" min="1" max="10" value="1" required>
+                            <button type="submit">Añadir</button>
+                        </form>
+                    {% endif %}
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
-    
 {% endblock %}

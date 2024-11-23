@@ -25,7 +25,7 @@
                     <i class="fa-solid fa-house"></i> EDB
                 </button>
             </a>
-            {% if is_homepage %}
+            {% if request.resolver_match.url_name == "home" %}
                 <section class="d-flex">
                     <select class="form-select rounded-end-0" id="departmentSelect" onchange="updateURLWithDepartment(this)">
                         <option value="Todos los departamentos" selected>Todos los departamentos</option>
@@ -42,7 +42,7 @@
                 </section>
             {% endif %}    
             <section class="d-flex gap-1">
-                <a href="/cart">
+                <a href="/cart/view/">
                     <button class="btn btn-light p-2" aria-label="Carrito">
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
