@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'product',
     'account',
-    "order"
+    "order",
+    "cart"
 ]
 
 MIDDLEWARE = [
@@ -121,8 +122,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
-MEDIA_URL = '/product/images/'
-MEDIA_ROOT = BASE_DIR / "product/images"
+MEDIA_URL = '/'
+MEDIA_ROOT = BASE_DIR / ''
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
