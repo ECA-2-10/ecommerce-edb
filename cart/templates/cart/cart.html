@@ -43,6 +43,9 @@
 
         <section id="cart-total">
             <p><strong>Total: {{ total }}€</strong></p>
+            {% if not user.is_authenticated %}
+                <p><a href="{% url 'login' %}"  class="link">Iniciar sesión</a></p>
+            {% endif %}
             <a href="/">Seguir comprando</a>
         </section>
     </main>
