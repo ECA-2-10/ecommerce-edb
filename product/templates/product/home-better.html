@@ -26,12 +26,22 @@
             {% endfor %}
         </div>
         <script>
+            // Mostrar el mensaje
+            const messageElement = document.querySelector('.message');
             setTimeout(() => {
-                const messages = document.getElementById('messages');
-                if (messages) {
-                    messages.style.opacity = 0;
-                    setTimeout(() => messages.remove(), 500);
-                }
+                messageElement.classList.add('show');
+            }, 100); // Esperar la duración de la animación antes de añadirlo
+            
+            // Ocultar el mensaje después de 5 segundos
+            setTimeout(() => {
+                // Añadir el mensaje del DOM
+                messageElement.classList.remove('show');
+                messageElement.classList.add('hide');
+
+                // Remover el mensaje del DOM después de la animación
+                setTimeout(() => {
+                    messageElement.remove();
+                }, 500); // Esperar la duración de la animación antes de eliminarlo
             }, 5000);
         </script>
     {% endif %}

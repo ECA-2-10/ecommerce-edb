@@ -136,7 +136,7 @@ footer p {
 }
 #productsContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); /* Ajusta el número de columnas según el ancho disponible */
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Ajusta el número de columnas según el ancho disponible */
     gap: 20px;
     padding: 20px 40px;
     margin: 0 auto;
@@ -215,6 +215,7 @@ footer p {
     justify-content: space-between;
     align-items: center;
     padding-top: 10px;
+    gap: 10px;
 }
 
 /* Precio */
@@ -223,22 +224,65 @@ footer p {
     font-size: 1.2em;
 }
 
+/* Formulario de añadir al carrito */
+.price-stock form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 5px; /* Añadir espacio entre el campo de cantidad y el botón */
+}
+
+.price-stock form input[type="number"] {
+    width: 50px; /* Ajustar el ancho del campo de entrada de número */
+    padding: 5px; /* Añadir algo de relleno para mejorar la apariencia */
+}
+
+.price-stock form button {
+    padding: 5px 10px; /* Mejorar el padding del botón */
+    background-color: #0069d9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Añadir un borde redondeado para hacer el botón más atractivo */
+    transition: background-color 0.3s ease;
+}
+
+.price-stock form button:hover {
+    background-color: #0056b3; /* Cambiar el color del botón al pasar el ratón por encima */
+}
+
 .message {
+    position: fixed; /* Para posicionarlo respecto a la ventana del navegador y no al flujo del documento */
+    right: 20px; /* Ajuste de distancia desde el borde derecho */
+    margin-top: 20px; /* Ajuste de distancia desde la parte superior */
+    transform: translateY(-30px); /* Inicialmente fuera de vista */
     background-color: #d4edda !important; /* Fondo verde claro para mensajes de éxito */
     color: #155724 !important; /* Texto verde oscuro para resaltar */
     padding: 15px !important;
-    border-radius: 5px !important;
-    border: 1px solid #c3e6cb !important; /* Borde ligeramente más oscuro */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important; /* Sombra suave */
+    border-radius: 15px !important;
+    border: 1px solid #c3e6cb !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; /* Sombra mejorada */
     font-size: 16px !important;
-    margin: 10px auto !important;
-    width: 90% !important;
+    width: 90%;
     max-width: 400px !important;
-    opacity: 1 !important;
-    transition: opacity 0.5s ease-out !important;
+    opacity: 0; /* Empieza oculto */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out !important; /* Transiciones mejoradas */
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
+    z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+}
+
+/* Clase adicional para mostrar el mensaje */
+.message.show {
+    opacity: 1;
+    transform: translateY(0); /* Mueve el mensaje a la posición visible */
+}
+
+/* Clase adicional para ocultar el mensaje */
+.message.hide {
+    opacity: 0;
+    transform: translateY(-30px); /* Mueve el mensaje hacia arriba mientras se desvanece */
 }
 
 .message.success {
