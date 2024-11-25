@@ -74,5 +74,5 @@ def add_amount_to_cart(request, product_id, amount):
 
         response = redirect('/')
         response.set_cookie('cart', json.dumps(cart))
-        messages.success(request, f'Has añadido {amount} unidades de {cart[str(product_id)]["name"]} al carrito.')
+        messages.success(request, f'Has añadido {amount} unidades de {cart[str(product_id)]["name"]} a la cesta.')
         return response

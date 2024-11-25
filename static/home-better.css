@@ -235,7 +235,7 @@ footer p {
     font-size: 1.2em;
 }
 
-/* Formulario de añadir al carrito */
+/* Formulario de añadir a la cesta */
 .price-stock form {
     display: flex;
     flex-direction: row;
