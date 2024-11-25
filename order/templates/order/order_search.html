@@ -43,7 +43,7 @@
                 <div><span>Dirección:</span> {{ order.address }}</div>
                 <div><span>Método de pago:</span> {{ order.get_paymentMethod_display }}</div>
                 <div><span>Fecha de entrega:</span> {{ order.deliveryDate }}</div>
-                <div><span>Total:</span> €{{ order.total }}</div>
+                <div><span>Total:</span> {{ order.total }}€</div>
             </div>
 
 
@@ -54,7 +54,6 @@
                     <img src="{{ order_product.product.image.url }}" alt="{{ order_product.product.name }}">
                     <h4>{{ order_product.product.name }}</h4>
                     <p class="product-quantity">Cantidad: {{ order_product.quantity }}</p>
-                    <p>Precio: €{{ order_product.product.price }}</p>
                 </div>
                 {% endfor %}
             </div>
