@@ -1,0 +1,53 @@
+{% extends 'base-better.html' %}
+{% block title %}Tu carrito - EDB Electronics{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDB Electronics - Tu carrito</title>
+    <link rel="stylesheet" href="{% static 'cart.css' %}">
+</head>
+
+<body>
+    <main>
+        <section id="cart-items">
+            <div id="product-list">
+                {% for product_id, item in cart.items %}
+                <div class="product-item">
+                    <img src="{{ item.image }}" alt="{{ item.name }}" class="product-image">
+                    <h4>{{ item.name }}</h4>
+                    <p class="product-price">Precio: {{ item.price }}€</p>
+                    <p class="product-quantity">Cantidad: {{ item.quantity }}</p>
+                    <p class="product-total">Total: {{ item.total }}€</p>
+                    
+                    <div class="product-actions">
+                        <form action="{% url 'cart:add_to_cart' product_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">+</button>
+                        </form>
+                        <form action="{% url 'cart:remove_from_cart' product_id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">-</button>
+                        </form>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section id="cart-total">
+            <p><strong>Total: {{ total }}€</strong></p>
+            {% if not user.is_authenticated %}
+                <p><a href="{% url 'login' %}"  class="link">Iniciar sesión</a></p>
+            {% endif %}
+            <a href="/">Seguir comprando</a>
+        </section>
+    </main>
+</body>
+{% endblock %}

@@ -15,7 +15,7 @@ class Category(models.Model):
     department = models.ForeignKey(Department, on_delete=models.CASCADE, related_name='categories')
 
     def __str__(self):
-        return f"{self.name}, {self.department.name}"
+        return f"{self.department.name}, {self.name}"
 
 class Product(models.Model):
     name = models.CharField(max_length=125)
@@ -23,7 +23,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)], help_text='El precio debe ser un valor positivo.')
     image = models.ImageField(upload_to='product/images', verbose_name='Imagen')
     maker = models.CharField(max_length=255)
-    stock = models.IntegerField(validators=[MinValueValidator(0)], help_text='El stock debe ser igual o mayor que cero.')
+    soldout = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     def __str__(self):

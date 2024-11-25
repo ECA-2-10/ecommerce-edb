@@ -1,0 +1,69 @@
+{% extends 'base-better.html' %}
+{% block title %}Registro - EDB Electronics{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDB Electronics - Buscar Pedido</title>
+    <link rel="stylesheet" href="{% static 'order.css' %}">
+</head>
+
+<body>
+    
+
+    <main >
+        <section id="search-order" >
+            <h2>Busca tu pedido</h2>
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" id="order_code" name="order_code" placeholder="Ingresa el código de tu pedido" required>
+                <button type="submit">Buscar</button>
+            </form>
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+        </section>
+
+        {% if order %}
+        <section id="order-details">
+            <h3>Detalles del pedido</h3>
+            <div id="order-status" class="{% if order.delivered %}delivered-true{% else %}delivered-false{% endif %}">
+                <div id="order-status-bar" style="width: {% if order.delivered %} 100% {% else %} 50% {% endif %};"></div>
+                <div id="order-status-text">{% if order.delivered %}Entregado{% else %}En camino{% endif %}</div>
+            </div>
+            <div id="order-details-table">
+                <div><span>Código:</span> {{ order.code }}</div>
+                <div><span>Email:</span> {{ order.email }}</div>
+                <div><span>Dirección:</span> {{ order.address }}</div>
+                <div><span>Método de pago:</span> {{ order.get_paymentMethod_display }}</div>
+                <div><span>Fecha de entrega:</span> {{ order.deliveryDate }}</div>
+                <div><span>Total:</span> €{{ order.total }}</div>
+            </div>
+
+
+            <h3>Productos</h3>
+            <div id="product-list">
+                {% for order_product in order_products %}
+                <div class="product-item">
+                    <img src="{{ order_product.product.image.url }}" alt="{{ order_product.product.name }}">
+                    <h4>{{ order_product.product.name }}</h4>
+                    <p class="product-quantity">Cantidad: {{ order_product.quantity }}</p>
+                    <p>Precio: €{{ order_product.product.price }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+
+</body>
+
+</html>
+{% endblock %}

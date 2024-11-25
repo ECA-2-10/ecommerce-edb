@@ -1,0 +1,303 @@
+html {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+main {
+    flex: 1;
+}
+
+.categories-container {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+    align-items: center;
+    position: relative;
+    padding: 0 3rem;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.category-button {
+    flex: 0 0 auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 0.5rem;
+}
+
+.category-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.category-button.active {
+    background-color: #0069d9;
+    color: white;
+    border-color: #0069d9;
+}
+
+.category-button.active .fa {
+    color: white;
+}
+
+
+.scroll-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #343a40;
+    color: white;
+    border: none;
+    z-index: 10;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    display: none; /* Inicialmente oculto */
+}
+
+.scroll-button.left {
+    left: 1rem;
+}
+
+.scroll-button.right {
+    right: 1rem;
+}
+
+.scroll-button.show {
+    display: inline-block;
+}
+
+.scroll-button:focus {
+    outline: none;
+}
+
+.product-card {
+    transition: transform 0.3s ease;
+}
+
+.card {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+.card-img-top {
+    object-fit: contain;
+    width: 100%;
+    height: 180px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+nav {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+footer {
+    background-color: #343a40;
+    color: #ffffff;
+    padding: 1rem 0;
+}
+
+footer p {
+    margin: 0;
+}
+
+.input-group input {
+    border-radius: 0.375rem 0 0 0.375rem;
+}
+
+.input-group button {
+    border-radius: 0 0.375rem 0.375rem 0;
+}
+
+.btn-light {
+    background-color: #ffffff;
+    color: #343a40;
+    border: 1px solid #ced4da;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-light:hover {
+    background-color: #e2e6ea;
+    color: #212529;
+}
+
+.row-cols-md-3 .col {
+    padding-bottom: 2rem;
+}
+#productsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); /* Ajusta el número de columnas según el ancho disponible */
+    gap: 20px;
+    padding: 20px 40px;
+    margin: 0 auto;
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    gap: 20px;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Contenedor de la imagen del producto */
+.product-image {
+    flex: 0 0 120px; /* Tamaño fijo para asegurar que todas las imágenes sean cuadradas */
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #f4f4f4; /* Fondo para ver la diferencia si la imagen es más pequeña */
+}
+
+.product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Asegura que la imagen se ajuste sin distorsión */
+}
+
+/* Contenedor de la información del producto */
+.product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    flex-grow: 1;
+}
+
+/* Título del producto */
+.product-info h5 {
+    font-size: 1.2em;
+    color: #333;
+    margin: 0;
+    text-align: left;
+}
+
+/* Descripción del producto */
+.product-info p {
+    font-size: 0.9em;
+    color: #666;
+    margin: 5px 0;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Limita a 3 líneas */
+    -webkit-box-orient: vertical;
+}
+
+/* Contenedor del precio y el stock */
+.price-stock {
+    margin-top: auto; /* Empuja este contenedor al final del div */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    gap: 10px;
+}
+
+/* Precio */
+.price-stock p strong {
+    color: #0069d9;
+    font-size: 1.2em;
+}
+
+/* Formulario de añadir al carrito */
+.price-stock form {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 5px; /* Añadir espacio entre el campo de cantidad y el botón */
+}
+
+.price-stock form input[type="number"] {
+    width: 50px; /* Ajustar el ancho del campo de entrada de número */
+    padding: 5px; /* Añadir algo de relleno para mejorar la apariencia */
+}
+
+.price-stock form button {
+    padding: 5px 10px; /* Mejorar el padding del botón */
+    background-color: #0069d9;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* Añadir un borde redondeado para hacer el botón más atractivo */
+    transition: background-color 0.3s ease;
+}
+
+.price-stock form button:hover {
+    background-color: #0056b3; /* Cambiar el color del botón al pasar el ratón por encima */
+}
+
+.message {
+    position: fixed; /* Para posicionarlo respecto a la ventana del navegador y no al flujo del documento */
+    right: 20px; /* Ajuste de distancia desde el borde derecho */
+    margin-top: 20px; /* Ajuste de distancia desde la parte superior */
+    transform: translateY(-30px); /* Inicialmente fuera de vista */
+    background-color: #d4edda !important; /* Fondo verde claro para mensajes de éxito */
+    color: #155724 !important; /* Texto verde oscuro para resaltar */
+    padding: 15px !important;
+    border-radius: 15px !important;
+    border: 1px solid #c3e6cb !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important; /* Sombra mejorada */
+    font-size: 16px !important;
+    width: 90%;
+    max-width: 400px !important;
+    opacity: 0; /* Empieza oculto */
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out !important; /* Transiciones mejoradas */
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    z-index: 9999; /* Asegura que el mensaje quede por encima de otros elementos */
+}
+
+/* Clase adicional para mostrar el mensaje */
+.message.show {
+    opacity: 1;
+    transform: translateY(0); /* Mueve el mensaje a la posición visible */
+}
+
+/* Clase adicional para ocultar el mensaje */
+.message.hide {
+    opacity: 0;
+    transform: translateY(-30px); /* Mueve el mensaje hacia arriba mientras se desvanece */
+}
+
+.message.success {
+    background-color: #d4edda !important;
+    color: #155724 !important;
+    border: 1px solid #c3e6cb !important;
+}

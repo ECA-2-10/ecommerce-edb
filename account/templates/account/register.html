@@ -1,51 +1,57 @@
-{% extends 'base.html' %}
+{% extends 'base-better.html' %}
+{% load static %}
+{% block title %}Registro - EDB Electronics{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'account.css' %}">
+{% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2>Crear cuenta</h2>
-        <form method="POST">
-            {% csrf_token %}
-            
-            <div class="form-group">
-                <label for="id_email">Correo electrónico</label>
-                {{ form.email }}
-                {% if form.email.errors %}
-                    <ul class="error-list">
-                        {% for error in form.email.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
+<div class="container">
+    <h2>Crear cuenta</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_email">Correo electrónico</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                <ul class="error-list">
+                    {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
-            <div class="form-group">
-                <label for="id_password1">Contraseña</label>
-                {{ form.password1 }}
-                {% if form.password1.errors %}
-                    <ul class="error-list">
-                        {% for error in form.password1.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
+        <div class="form-group">
+            <label for="id_password1">Contraseña</label>
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <ul class="error-list">
+                    {% for error in form.password1.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
-            <div class="form-group">
-                <label for="id_password2">Confirmar contraseña</label>
-                {{ form.password2 }}
-                {% if form.password2.errors %}
-                    <ul class="error-list">
-                        {% for error in form.password2.errors %}
-                            <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </div>
+        <div class="form-group">
+            <label for="id_password2">Confirmar contraseña</label>
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <ul class="error-list">
+                    {% for error in form.password2.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
 
-            
-            <button type="submit" class="button">Registrar</button>
-        </form>
+        
+        <button type="submit" class="button">Registrar</button>
+    </form>
 
-        <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}">Iniciar sesión</a></p>
-    </div>
+    <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}"  class="link">Iniciar sesión</a></p>
+</div>
 {% endblock %}

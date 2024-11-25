@@ -1,0 +1,19 @@
+<!-- carrito.html -->
+{% extends 'base-better.html' %}
+{% block content %}
+    <div id="cart-container">
+        <h2>Tu Carrito</h2>
+        <div id="cart-items">
+            <!-- Aquí se mostrarán los productos del carrito -->
+        </div>
+        <div id="cart-total">
+            <h3>Total: €<span id="total-price">0</span></h3>
+        </div>
+        <button id="checkout-button" disabled>Proceder al Pago</button>
+    </div>
+
+    <button id="add-to-cart" onclick="addToCart(1, 'Producto 1', 50)">Agregar Producto 1</button>
+    <button id="add-to-cart" onclick="addToCart(2, 'Producto 2', 75)">Agregar Producto 2</button>
+
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}

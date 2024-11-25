@@ -1,0 +1,79 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EDB Electronics</title>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'home-better.css' %}">
+    <!-- Custom JS -->
+    <script src="{% static 'js/home.js' %}" defer></script>
+    {% block extra_css %}
+    {% endblock %}
+</head>
+<body>
+    <header>
+        <nav class="d-flex justify-content-between px-4 py-3 bg-dark">
+            <a href="/">
+                <button class="btn btn-light p-2" aria-label="Inicio">
+                    <i class="fa-solid fa-house"></i> EDB
+                </button>
+            </a>
+            {% if request.resolver_match.url_name == "home" %}
+                <section class="d-flex">
+                    <select class="form-select rounded-end-0" id="departmentSelect" onchange="updateURLWithDepartment(this)">
+                        <option value="Todos los departamentos" selected>Todos los departamentos</option>
+                        {% for department in departments %}
+                        <option value="{{ department.name }}">{{ department.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <div class="input-group">
+                        <input type="text" id="searchInput" class="form-control rounded-start-0" placeholder="Buscar productos..." onkeypress="handleSearch(event)">
+                        <button class="btn btn-light border-start" onclick="triggerSearch()" aria-label="Buscar">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </section>
+            {% endif %}    
+            <section class="d-flex gap-1">
+                <a href="/order/">
+                    <button class="btn btn-light p-2" aria-label="Pedidos">
+                        <i class="fa-solid fa-box"></i>
+                    </button>
+                </a>
+                <a href="/cart/view/">
+                    <button class="btn btn-light p-2" aria-label="Carrito">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </button>
+                </a>
+                <a href="{% if user.is_authenticated %}/account/logout{% else %}/account/login{% endif %}">
+                    <button class="btn btn-light p-2" aria-label="Perfil">
+                        <i class="fa-solid fa-user"></i>
+                        {% if user.is_authenticated %}
+                            Cerrar sesión
+                        {% else %}
+                            Iniciar sesión
+                        {% endif %}
+                    </button>
+                </a>
+            </section>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+        <!-- Contenido específico de cada página -->
+        {% endblock %}
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3">
+        <p>&copy; 2024 EDB Electronics. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
