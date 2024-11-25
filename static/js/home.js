@@ -1,28 +1,61 @@
+// Función para actualizar la URL cuando se selecciona un departamento
 function updateURLWithDepartment(selectElement) {
     const departmentName = selectElement.value;
-    filterCategoriesByDepartment(departmentName);
     const url = new URL(window.location.href);
+
     if (departmentName === 'Todos los departamentos') {
         url.searchParams.delete('department');
     } else {
         url.searchParams.set('department', departmentName);
     }
-    url.searchParams.delete('category'); // Reset category when department changes
+
+    url.searchParams.delete('category'); // Resetear categoría cuando cambia el departamento
     window.history.pushState({}, '', url);
+
+    filterCategoriesByDepartment(departmentName);
     filterProducts();
 }
 
+// Función para filtrar productos por categoría
 function filterProductsByCategory(categoryName) {
     const url = new URL(window.location.href);
-    if (categoryName === 'Todas las categorías') {
+    const allButton = document.querySelector('.category-button.all-button');
+    const currentDepartment = allButton.getAttribute('data-department') || '';
+
+    if (!categoryName) { // Si categoryName está vacío, es el botón "Todos"
         url.searchParams.delete('category');
     } else {
         url.searchParams.set('category', categoryName);
     }
+
     window.history.pushState({}, '', url);
     filterProducts();
+
+    // Manejar la clase 'active' en los botones de categoría
+    const categoryButtons = document.querySelectorAll('.category-button');
+    categoryButtons.forEach(button => {
+        const btnCategory = button.getAttribute('data-category-name');
+        if (btnCategory === categoryName) {
+            button.classList.add('active');
+        } else {
+            button.classList.remove('active');
+        }
+    });
+
+    if (!categoryName) {
+        // Si se selecciona "Todos", activar el botón "Todos"
+        if (allButton) {
+            allButton.classList.add('active');
+        }
+    } else {
+        // Asegurar que "Todos" no está activo
+        if (allButton) {
+            allButton.classList.remove('active');
+        }
+    }
 }
 
+// Funciones para manejar la búsqueda
 function handleSearch(event) {
     if (event.key === 'Enter') {
         performSearch(event.target.value);
@@ -45,6 +78,7 @@ function performSearch(searchQuery) {
     filterProducts();
 }
 
+// Evento al cargar el DOM
 document.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const department = urlParams.get('department');
@@ -54,10 +88,19 @@ document.addEventListener('DOMContentLoaded', (event) => {
     if (department) {
         document.getElementById('departmentSelect').value = department;
         filterCategoriesByDepartment(department);
+    } else {
+        // Mostrar todas las categorías si no hay departamento seleccionado
+        filterCategoriesByDepartment('Todos los departamentos');
     }
 
     if (category) {
         filterProductsByCategory(category);
+    } else {
+        // Asegurarse de que el botón "Todos" esté seleccionado visualmente
+        const allButton = document.querySelector('.category-button.all-button');
+        if (allButton) {
+            allButton.classList.add('active');
+        }
     }
 
     if (searchQuery) {
@@ -68,19 +111,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     updateScrollButtonsVisibility();
 });
 
+// Función para filtrar las categorías según el departamento
 function filterCategoriesByDepartment(departmentName) {
-    // Actualiza la visibilidad de los botones de categoría en el header
     const categoryButtons = document.querySelectorAll('.category-button');
     categoryButtons.forEach(button => {
-        if (departmentName === "Todos los departamentos" || button.getAttribute('data-department') === departmentName) {
+        if (button.classList.contains('all-button')) {
+            // Siempre mostrar el botón "Todos"
             button.style.display = "inline-flex";
         } else {
-            button.style.display = "none";
+            const btnDepartment = button.getAttribute('data-department');
+            if (departmentName === "Todos los departamentos" || btnDepartment === departmentName) {
+                // Mostrar botón si pertenece al departamento seleccionado o si se muestran todos los departamentos
+                button.style.display = "inline-flex";
+            } else {
+                // Ocultar botón si no pertenece al departamento seleccionado
+                button.style.display = "none";
+            }
         }
     });
     updateScrollButtonsVisibility();
 }
 
+// Función para filtrar los productos según los filtros aplicados
 function filterProducts() {
     const urlParams = new URLSearchParams(window.location.search);
     const department = urlParams.get('department');
@@ -99,7 +151,7 @@ function filterProducts() {
             isVisible = false;
         }
 
-        if (category && category !== "Todas las categorías" && productCategory !== category) {
+        if (category && productCategory !== category) { // Simplificado ya que category es eliminado si es "Todos"
             isVisible = false;
         }
 
@@ -115,6 +167,7 @@ function filterProducts() {
     });
 }
 
+// Funciones para manejar el desplazamiento de categorías
 function scrollCategories(scrollAmount) {
     const container = document.getElementById('categoriesContainer');
     container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
@@ -140,4 +193,5 @@ function updateScrollButtonsVisibility() {
     }
 }
 
+// Evento para actualizar la visibilidad de los botones de desplazamiento al hacer scroll
 document.getElementById('categoriesContainer').addEventListener('scroll', updateScrollButtonsVisibility);

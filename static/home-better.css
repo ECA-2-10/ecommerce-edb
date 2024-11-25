@@ -39,6 +39,17 @@ main {
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
+.category-button.active {
+    background-color: #0069d9;
+    color: white;
+    border-color: #0069d9;
+}
+
+.category-button.active .fa {
+    color: white;
+}
+
+
 .scroll-button {
     position: absolute;
     top: 50%;

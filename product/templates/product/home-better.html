@@ -6,10 +6,18 @@
             <i class="fas fa-chevron-left"></i>
         </button>
         <div class="categories-container" id="categoriesContainer">
-            {% for category in categories %}
-            <button class="btn btn-outline-secondary mx-1 category-button" data-department="{{ category.department.name }}" onclick="filterProductsByCategory('{{ category.name }}')" aria-label="Categoría {{ category.name }}">
+            <!-- Botón "Todos" -->
+            <button class="btn btn-outline-secondary mx-1 category-button all-button" data-department="{% if request.GET.department %}{{ request.GET.department }}{% else %}''{% endif %}" onclick="filterProductsByCategory('')" aria-label="Mostrar todos los productos">
                 <div class="d-flex align-items-center gap-2 py-2 px-3">
-                    <i class="{{ category.icon }}"></i>
+                    <p class="m-0">Todos</p>
+                </div>
+            </button>
+
+            <!-- Botones de Categorías -->
+            {% for category in categories %}
+            <button class="btn btn-outline-secondary mx-1 category-button" data-department="{{ category.department.name }}" data-category-name="{{ category.name }}" onclick="filterProductsByCategory('{{ category.name }}')" aria-label="Categoría {{ category.name }}">
+                <div class="d-flex align-items-center gap-2 py-2 px-3">
+                    <i class="{{ category.department.icon }}"></i>
                     <p class="m-0">{{ category.name }}</p>
                 </div>
             </button>
