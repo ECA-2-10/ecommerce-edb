@@ -52,7 +52,7 @@
                         <i class="fa-solid fa-cart-shopping"></i>
                     </button>
                 </a>
-                <a href="{% if user.is_authenticated %}/account/logout{% else %}/account/login{% endif %}">
+                <a href="{% if user.is_authenticated %}/account/logout/{% else %}/account/login{% endif %}">
                     <button class="btn btn-light p-2" aria-label="Perfil">
                         <i class="fa-solid fa-user"></i>
                         {% if user.is_authenticated %}
