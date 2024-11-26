@@ -1,0 +1,63 @@
+{% extends 'base-better.html' %}
+{% block title %}Pago exitoso - EDB Electronics{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="alert alert-success text-center mb-4">
+                <h2 class="mb-3"><i class="fas fa-check-circle"></i> ¡Pago realizado con éxito!</h2>
+                <p>Te hemos enviado un correo electrónico con los detalles de tu pedido.</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Resumen del pedido</h3>
+                </div>
+                <div class="card-body">
+                    <h4>Información de envío</h4>
+                    <p><strong>Email:</strong> {{ email }}</p>
+                    <p><strong>Dirección:</strong> {{ address.address }}</p>
+                    <p><strong>País:</strong> {{ address.country }}</p>
+                    <p><strong>Estado/Provincia:</strong> {{ address.state }}</p>
+                    <p><strong>Código Postal:</strong> {{ address.postal_code }}</p>
+
+                    <h4 class="mt-4">Productos</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Cantidad</th>
+                                    <th>Precio unitario</th>
+                                    <th>Total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for product_id, item in cart.items %}
+                                <tr>
+                                    <td>{{ item.name }}</td>
+                                    <td>{{ item.quantity }}</td>
+                                    <td>{{ item.price }}€</td>
+                                    <td>{{ item.total }}€</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
+                                    <td><strong>{{ total }}€</strong></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-4">
+                <a href="/" class="btn btn-primary">Volver a la tienda</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

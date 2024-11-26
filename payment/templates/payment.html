@@ -1,0 +1,66 @@
+{% extends 'base-better.html' %}
+{% block title %}Proceso de pago - EDB Electronics{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="progress mb-4">
+                <div class="progress-bar" role="progressbar" style="{{ progress_percentage }}"></div>
+            </div>
+
+            {% if step == 1 %}
+            <form method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email"
+                        value="{% if user.is_authenticated %}{{ user.email }}{% else %}{{ stored_email }}{% endif %}"
+                        required>
+                    {% if not user.is_authenticated %}
+                    <small class="text-muted">¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a></small>
+                    {% endif %}
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="submit" class="btn btn-primary">Siguiente</button>
+                </div>
+            </form>
+
+            {% elif step == 2 %}
+            <form method="POST" action="{% url 'payment:create-checkout' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="address">Dirección</label>
+                    <input type="text" class="form-control" id="address" name="address"
+                        value="{{ stored_address.address }}" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="country">País</label>
+                    <input type="text" class="form-control" id="country" name="country"
+                        value="{{ stored_address.country }}" required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="state">Estado/Provincia</label>
+                    <input type="text" class="form-control" id="state" name="state" value="{{ stored_address.state }}"
+                        required>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="postal_code">Código Postal</label>
+                    <input type="text" class="form-control" id="postal_code" name="postal_code"
+                        value="{{ stored_address.postal_code }}" required>
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <button type="submit" name="back" formaction="{% url 'payment:process' %}" formmethod="POST"
+                        class="btn btn-secondary">Volver</button>
+                    <button type="submit" class="btn btn-primary">Proceder al pago</button>
+                </div>
+            </form>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
