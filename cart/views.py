@@ -1,11 +1,13 @@
 import json
-from django.http import JsonResponse
-from django.shortcuts import render, redirect
+
 from django.contrib import messages
+from django.http import JsonResponse
+from django.shortcuts import redirect, render
+
 from product.models import Product
 
-def add_to_cart(request, product_id):
 
+def add_to_cart(request, product_id):
     try:
         product = Product.objects.get(id=product_id)
     except Product.DoesNotExist:
@@ -14,14 +16,20 @@ def add_to_cart(request, product_id):
     if product.soldout:
         return redirect('cart:view_cart')
     else:
-        product = {"id": product_id, "name": product.name, "price": float(product.price), "quantity": 1, "total": float(product.price), "image": product.image.url}
+        product = {
+            "id": product_id,
+            "name": product.name,
+            "price": float(product.price),
+            "quantity": 1,
+            "total": float(product.price),
+            "image": product.image.url
+        }
         cart = request.COOKIES.get('cart')
         cart = json.loads(cart) if cart else {}
 
         if str(product_id) in cart:
             cart[str(product_id)]['quantity'] += 1
-            cart[str(product_id)]['total'] += cart[str(product_id)]['total']
-            cart[str(product_id)]['total'] = round(cart[str(product_id)]['total'],2)
+            cart[str(product_id)]['total'] = round(cart[str(product_id)]['price'] * cart[str(product_id)]['quantity'], 2)
         else:
             cart[str(product_id)] = product
 
@@ -61,14 +69,20 @@ def add_amount_to_cart(request, product_id, amount):
     if product.soldout:
         return redirect('/')
     else:
-        product = {"id": product_id, "name": product.name, "price": float(product.price), "quantity": amount, "total": float(round(product.price * amount,2)), "image": product.image.url}
+        product = {
+            "id": product_id,
+            "name": product.name,
+            "price": float(product.price),
+            "quantity": amount,
+            "total": float(round(product.price * amount, 2)),
+            "image": product.image.url
+        }
         cart = request.COOKIES.get('cart')
         cart = json.loads(cart) if cart else {}
 
         if str(product_id) in cart:
             cart[str(product_id)]['quantity'] += amount
-            cart[str(product_id)]['total'] += cart[str(product_id)]['total']
-            cart[str(product_id)]['total'] = round(cart[str(product_id)]['total'], 2)
+            cart[str(product_id)]['total'] = round(cart[str(product_id)]['price'] * cart[str(product_id)]['quantity'], 2)
         else:
             cart[str(product_id)] = product
 
