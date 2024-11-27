@@ -106,16 +106,3 @@ input {
 .link:hover {
     text-decoration: underline;
 }
-
-footer {
-    background-color: #2e3b4e;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 40px;
-}
-
-footer p {
-    margin: 0;
-    font-size: 1em;
-}

@@ -196,16 +196,3 @@ main {
     font-weight: bold;
     margin-bottom: 10px;
 }
-
-footer {
-    background-color: #2e3b4e;
-    color: #fff;
-    text-align: center;
-    padding: 15px 0;
-    margin-top: 20px;
-}
-
-footer p {
-    margin: 0;
-    font-size: 1em;
-}
