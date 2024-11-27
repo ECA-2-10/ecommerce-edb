@@ -9,13 +9,16 @@ https://docs.djangoproject.com/en/5.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
-
-from django.contrib.messages import constants as messages
 from pathlib import Path
+
+import environ
+from django.contrib.messages import constants as messages
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
+environ.Env.read_env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -41,7 +44,8 @@ INSTALLED_APPS = [
     'product',
     'account',
     "order",
-    "cart"
+    "cart",
+    "payment",
 ]
 
 MIDDLEWARE = [
@@ -136,3 +140,15 @@ AUTH_USER_MODEL = 'account.CustomUser'
 MESSAGE_TAGS = {
     messages.SUCCESS: 'success'
 }
+
+# Stripe Settings
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'edbelectronics210@gmail.com'
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'EDB Electronics <edbelectronics210@gmail.com>'

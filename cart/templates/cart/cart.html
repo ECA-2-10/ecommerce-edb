@@ -4,50 +4,50 @@
 {% block content %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="es">
+<div class="container py-5">
+    <h2 class="mb-4">Tu cesta de compra</h2>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EDB Electronics - Tu cesta</title>
-    <link rel="stylesheet" href="{% static 'cart.css' %}">
-</head>
-
-<body>
-    <main>
-        <section id="cart-items">
-            <div id="product-list">
+    <div class="row">
+        <div class="col-md-8">
+            <section id="cart-items">
                 {% for product_id, item in cart.items %}
                 <div class="product-item">
                     <img src="{{ item.image }}" alt="{{ item.name }}" class="product-image">
-                    <h4>{{ item.name }}</h4>
-                    <p class="product-price">Precio: {{ item.price }}€</p>
-                    <p class="product-quantity">Cantidad: {{ item.quantity }}</p>
-                    <p class="product-total">Total: {{ item.total }}€</p>
-                    
-                    <div class="product-actions">
-                        <form action="{% url 'cart:add_to_cart' product_id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">+</button>
-                        </form>
-                        <form action="{% url 'cart:remove_from_cart' product_id %}" method="post">
-                            {% csrf_token %}
-                            <button type="submit">-</button>
-                        </form>
+                    <div class="product-info">
+                        <h4 class="mb-2">{{ item.name }}</h4>
+                        <p class="product-price mb-1">Precio unitario: {{ item.price }}€</p>
+                        <div class="d-flex align-items-center gap-3">
+                            <p class="product-quantity mb-0">Cantidad: {{ item.quantity }}</p>
+                            <div class="product-actions">
+                                <form action="{% url 'cart:add_to_cart' product_id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-primary">+</button>
+                                </form>
+                                <form action="{% url 'cart:remove_from_cart' product_id %}" method="post"
+                                    class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-sm btn-danger">-</button>
+                                </form>
+                            </div>
+                        </div>
+                        <p class="product-total mt-2"><strong>Total: {{ item.total }}€</strong></p>
                     </div>
                 </div>
                 {% endfor %}
-            </div>
-        </section>
+            </section>
+        </div>
 
-        <section id="cart-total">
-            <p><strong>Total: {{ total }}€</strong></p>
-            {% if not user.is_authenticated %}
-                <p><a href="{% url 'login' %}"  class="link">Iniciar sesión</a></p>
-            {% endif %}
-            <a href="/">Seguir comprando</a>
-        </section>
-    </main>
-</body>
+        <div class="col-md-4">
+            <section id="cart-total" class="position-sticky" style="top: 2rem;">
+                <h3 class="mb-3">Resumen del pedido</h3>
+                <p class="h4 mb-4">Total: {{ total }}€</p>
+                <a href="/payment/" class="btn btn-primary w-100 checkout-button">
+                    <i class="fas fa-lock"></i>
+                    Proceder al pago seguro
+                </a>
+                <a href="/" class="btn btn-outline-primary w-100 mt-3">Seguir comprando</a>
+            </section>
+        </div>
+    </div>
+</div>
 {% endblock %}
