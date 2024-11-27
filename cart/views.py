@@ -19,7 +19,8 @@ def add_to_cart(request, product_id):
         cart = request.COOKIES.get('cart')
         cart = json.loads(cart) if cart else {}
 
-        if product.stock - cart[str(product_id)]['quantity'] - 1 < 0:
+        if product.stock - 1 < 0 or (str(product_id) in cart and product.stock - cart[str(product_id)]['quantity'] - 1 < 0):
+            messages.error(request, 'Existencias del producto superadas.')
             return redirect('cart:view_cart')
 
         if str(product_id) in cart:
@@ -76,6 +77,7 @@ def add_amount_to_cart(request, product_id, amount):
         cart = json.loads(cart) if cart else {}
 
         if product.stock - amount < 0 or (str(product_id) in cart and product.stock - cart[str(product_id)]['quantity'] - amount < 0):
+            messages.error(request, 'Existencias del producto superadas.')
             return redirect('/')
 
         if str(product_id) in cart:

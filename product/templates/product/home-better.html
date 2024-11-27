@@ -30,7 +30,7 @@
     {% if messages %}
         <div id="messages">
             {% for message in messages %}
-                <div class="message"> {{ message }}</div>
+                <div class="message {{ message.tags }}"> {{ message }}</div>
             {% endfor %}
         </div>
         <script>

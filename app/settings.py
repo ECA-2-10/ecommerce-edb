@@ -138,7 +138,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.CustomUser'
 
 MESSAGE_TAGS = {
-    messages.SUCCESS: 'success'
+    messages.SUCCESS: 'success',
+    messages.ERROR: 'error'
 }
 
 # Stripe Settings
