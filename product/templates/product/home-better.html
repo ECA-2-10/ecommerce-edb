@@ -64,11 +64,11 @@
                 <p>{{ product.description }}</p>
                 <div class="price-stock">
                     <p><strong>{{ product.price }}€</strong></p>
-                    {% if product.soldout %}
+                    {% if product.stock == 0 %}
                         <p>Agotado</p>
                     {% else %}
                         <form method="get" onsubmit="location.href='/cart/add-amount/{{ product.id }}/' + this.amount.value + '/'; return false;">
-                            <input type="number" name="amount" min="1" max="10" value="1" required>
+                            <input type="number" name="amount" min="1" max="{{product.stock}}" value="1" required>
                             <button type="submit">Añadir</button>
                         </form>
                     {% endif %}
