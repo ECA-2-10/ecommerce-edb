@@ -29,7 +29,7 @@
             </form>
 
             {% elif step == 2 %}
-            <form method="POST" action="{% url 'payment:create-checkout' %}">
+            <form method="POST" id="addressForm">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="address">Dirección</label>
@@ -54,7 +54,14 @@
                 <div class="d-flex justify-content-between mt-3">
                     <button type="submit" name="back" formaction="{% url 'payment:process' %}" formmethod="POST"
                         class="btn btn-secondary">Volver</button>
-                    <button type="submit" class="btn btn-primary">Proceder al pago</button>
+                    <div>
+                        <button type="submit" formaction="{% url 'payment:create-checkout' %}" class="btn btn-primary">
+                            Pagar con tarjeta <i class="fas fa-credit-card"></i>
+                        </button>
+                        <button type="submit" formaction="{% url 'payment:pay-cash' %}" class="btn btn-success">
+                            Pagar en efectivo <i class="fas fa-money-bill-wave"></i>
+                        </button>
+                    </div>
                 </div>
             </form>
 

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .order-details {
+            margin: 20px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Confirmación de Pedido - EDB Electronics</h1>
+        <p>Gracias por tu compra. Aquí están los detalles de tu pedido:</p>
+
+        <div class="order-details">
+            <p><strong>Código de pedido:</strong> {{ order.code }}</p>
+            <p><strong>Método de pago:</strong> {{ payment_method }}</p>
+            <p><strong>Dirección de envío:</strong> {{ order.address }}</p>
+            <p><strong>Fecha de entrega estimada:</strong> {{ order.deliveryDate }}</p>
+        </div>
+
+        <h2>Productos:</h2>
+        <table>
+            <tr>
+                <th>Producto</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th>
+            </tr>
+            {% for product_id, item in cart.items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.quantity }}</td>
+                <td>{{ item.price }}€</td>
+                <td>{{ item.total }}€</td>
+            </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                <td><strong>{{ order.total }}€</strong></td>
+            </tr>
+        </table>
+
+        <p>Si tienes alguna pregunta, no dudes en contactarnos.</p>
+    </div>
+</body>
+
+</html>

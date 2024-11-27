@@ -143,3 +143,12 @@ MESSAGE_TAGS = {
 
 # Stripe Settings
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'edbelectronics210@gmail.com'
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = 'EDB Electronics <edbelectronics210@gmail.com>'
