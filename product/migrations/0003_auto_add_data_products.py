@@ -24,7 +24,7 @@ def add_initial_products(apps, schema_editor):
         price=2499.99,
         image='product/images/refrigerador_samsung_family_hub.jpg',
         maker='Samsung',
-        soldout=False,
+        stock=30,
         category=electrodomesticos
     )
     
@@ -34,7 +34,7 @@ def add_initial_products(apps, schema_editor):
         price=899.99,
         image='product/images/lavavajillas_bosch_serie6.jpg',
         maker='Bosch',
-        soldout=False,
+        stock=20,
         category=electrodomesticos
     )
     
@@ -44,7 +44,7 @@ def add_initial_products(apps, schema_editor):
         price=299.99,
         image='product/images/microondas_lg_neochef.jpg',
         maker='LG',
-        soldout=False,
+        stock=0,
         category=electrodomesticos
     )
     
@@ -54,7 +54,7 @@ def add_initial_products(apps, schema_editor):
         price=499.99,
         image='product/images/placa_induccion_teka_iic.jpg',
         maker='Teka',
-        soldout=False,
+        stock=25,
         category=electrodomesticos
     )
     
@@ -64,7 +64,7 @@ def add_initial_products(apps, schema_editor):
         price=399.99,
         image='product/images/extractor_aire_siemens_iq700.jpg',
         maker='Siemens',
-        soldout=True,
+        stock=15,
         category=electrodomesticos
     )
     
@@ -75,7 +75,7 @@ def add_initial_products(apps, schema_editor):
         price=149.99,
         image='product/images/cuchillos_global_8piezas.jpg',
         maker='Global',
-        soldout=False,
+        stock=100,
         category=utensilios
     )
     
@@ -85,7 +85,7 @@ def add_initial_products(apps, schema_editor):
         price=129.99,
         image='product/images/sartenes_tefal_titanium.jpg',
         maker='Tefal',
-        soldout=False,
+        stock=80,
         category=utensilios
     )
     
@@ -95,7 +95,7 @@ def add_initial_products(apps, schema_editor):
         price=599.99,
         image='product/images/ollas_lecreuset.jpg',
         maker='Le Creuset',
-        soldout=True,
+        stock=0,
         category=utensilios
     )
     
@@ -105,7 +105,7 @@ def add_initial_products(apps, schema_editor):
         price=349.99,
         image='product/images/batidora_kitchenaid_artisan.jpg',
         maker='KitchenAid',
-        soldout=False,
+        stock=60,
         category=utensilios
     )
     
@@ -115,7 +115,7 @@ def add_initial_products(apps, schema_editor):
         price=29.99,
         image='product/images/tabla_cortar_bambu.jpg',
         maker='OXO',
-        soldout=False,
+        stock=150,
         category=utensilios
     )
     
@@ -126,7 +126,7 @@ def add_initial_products(apps, schema_editor):
         price=49.99,
         image='product/images/tostadora_philips_daily.jpg',
         maker='Philips',
-        soldout=True,
+        stock=70,
         category=peque_electro
     )
     
@@ -136,7 +136,7 @@ def add_initial_products(apps, schema_editor):
         price=199.99,
         image='product/images/cafetera_nespresso_vertuo.jpg',
         maker='Nespresso',
-        soldout=False,
+        stock=55,
         category=peque_electro
     )
     
@@ -146,7 +146,7 @@ def add_initial_products(apps, schema_editor):
         price=449.99,
         image='product/images/licuadora_vitamix_5200.jpg',
         maker='Vitamix',
-        soldout=False,
+        stock=35,
         category=peque_electro
     )
     
@@ -156,7 +156,7 @@ def add_initial_products(apps, schema_editor):
         price=299.99,
         image='product/images/freidora_aire_philips.jpg',
         maker='Philips',
-        soldout=False,
+        stock=45,
         category=peque_electro
     )
     
@@ -166,7 +166,7 @@ def add_initial_products(apps, schema_editor):
         price=599.99,
         image='product/images/robot_cocina_moulinex_companion.jpg',
         maker='Moulinex',
-        soldout=False,
+        stock=25,
         category=peque_electro
     )
     
@@ -176,7 +176,7 @@ def add_initial_products(apps, schema_editor):
         price=699.99,
         image='product/images/cafetera_delonghi_magnifica.jpg',
         maker='DeLonghi',
-        soldout=False,
+        stock=20,
         category=peque_electro
     )
     
@@ -186,7 +186,7 @@ def add_initial_products(apps, schema_editor):
         price=89.99,
         image='product/images/plancha_panini_breville.jpg',
         maker='Breville',
-        soldout=False,
+        stock=65,
         category=peque_electro
     )
     
@@ -196,7 +196,7 @@ def add_initial_products(apps, schema_editor):
         price=349.99,
         image='product/images/extractor_jugos_omega_j8006.jpg',
         maker='Omega',
-        soldout=False,
+        stock=30,
         category=peque_electro
     )
     
@@ -206,7 +206,7 @@ def add_initial_products(apps, schema_editor):
         price=199.99,
         image='product/images/maquina_pan_panasonic_sdyd250.jpg',
         maker='Panasonic',
-        soldout=False,
+        stock=40,
         category=peque_electro
     )
     
@@ -216,7 +216,7 @@ def add_initial_products(apps, schema_editor):
         price=129.99,
         image='product/images/humidificador_philips_series2000.jpg',
         maker='Philips',
-        soldout=False,
+        stock=50,
         category=peque_electro
     )
     
@@ -226,7 +226,7 @@ def add_initial_products(apps, schema_editor):
         price=39.99,
         image='product/images/ventilador_honeywell_ht900e.jpg',
         maker='Honeywell',
-        soldout=False,
+        stock=100,
         category=peque_electro
     )
     
@@ -236,7 +236,7 @@ def add_initial_products(apps, schema_editor):
         price=299.99,
         image='product/images/calentador_agua_ariston.jpg',
         maker='Ariston',
-        soldout=False,
+        stock=20,
         category=peque_electro
     )
     
@@ -247,7 +247,7 @@ def add_initial_products(apps, schema_editor):
         price=499.99,
         image='product/images/despensa_inteligente_smartstor.jpg',
         maker='SmartStor',
-        soldout=False,
+        stock=10,
         category=almacenamiento
     )
     
@@ -257,7 +257,7 @@ def add_initial_products(apps, schema_editor):
         price=59.99,
         image='product/images/contenedores_locklock.jpg',
         maker='Lock&Lock',
-        soldout=False,
+        stock=200,
         category=almacenamiento
     )
     
@@ -267,7 +267,7 @@ def add_initial_products(apps, schema_editor):
         price=199.99,
         image='product/images/envasadora_foodsaver_v4840.jpg',
         maker='FoodSaver',
-        soldout=False,
+        stock=35,
         category=almacenamiento
     )
     
@@ -277,7 +277,7 @@ def add_initial_products(apps, schema_editor):
         price=799.99,
         image='product/images/refrigerador_vinotemp_24botellas.jpg',
         maker='Vinotemp',
-        soldout=False,
+        stock=15,
         category=almacenamiento
     )
     
@@ -288,7 +288,7 @@ def add_initial_products(apps, schema_editor):
         price=49.99,
         image='product/images/maquina_cafe_moka.jpg',
         maker='Bialetti',
-        soldout=False,
+        stock=80,
         category=otros
     )
     
@@ -298,7 +298,7 @@ def add_initial_products(apps, schema_editor):
         price=39.99,
         image='product/images/medidores_oxo.jpg',
         maker='OXO',
-        soldout=True,
+        stock=120,
         category=otros
     )
 

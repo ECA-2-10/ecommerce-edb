@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
                 ('price', models.DecimalField(decimal_places=2, help_text='El precio debe ser un valor positivo.', max_digits=10, validators=[django.core.validators.MinValueValidator(0.01)])),
                 ('image', models.ImageField(upload_to='product/images', verbose_name='Imagen')),
                 ('maker', models.CharField(max_length=255)),
-                ('soldout', models.BooleanField(default=False)),
+                ('stock', models.IntegerField(help_text='El stock debe ser igual o mayor que cero.', validators=[django.core.validators.MinValueValidator(0)])),
                 ('category', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='product.category')),
             ],
         ),

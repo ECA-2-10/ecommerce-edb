@@ -160,6 +160,8 @@ def payment_success(request):
             product=product,
             quantity=item['quantity']
         )
+        product.stock -= item['quantity']
+        Product.save(product)
     
     send_order_email(order, cart)
     

@@ -7,6 +7,33 @@
 <div class="container py-5">
     <h2 class="mb-4">Tu cesta de compra</h2>
 
+    {% if messages %}
+        <div id="messages">
+            {% for message in messages %}
+                <div class="message {{ message.tags }}"> {{ message }}</div>
+            {% endfor %}
+        </div>
+        <script>
+            // Mostrar el mensaje
+            const messageElement = document.querySelector('.message');
+            setTimeout(() => {
+                messageElement.classList.add('show');
+            }, 100); // Esperar la duración de la animación antes de añadirlo
+            
+            // Ocultar el mensaje después de 5 segundos
+            setTimeout(() => {
+                // Añadir el mensaje del DOM
+                messageElement.classList.remove('show');
+                messageElement.classList.add('hide');
+
+                // Remover el mensaje del DOM después de la animación
+                setTimeout(() => {
+                    messageElement.remove();
+                }, 500); // Esperar la duración de la animación antes de eliminarlo
+            }, 5000);
+        </script>
+    {% endif %}
+
     <div class="row">
         <div class="col-md-8">
             <section id="cart-items">

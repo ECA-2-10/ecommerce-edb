@@ -13,25 +13,28 @@ def add_to_cart(request, product_id):
     except Product.DoesNotExist:
         return redirect('cart:view_cart')
     
-    if product.soldout:
+    if product.stock == 0:
         return redirect('cart:view_cart')
     else:
-        product = {
-            "id": product_id,
-            "name": product.name,
-            "price": float(product.price),
-            "quantity": 1,
-            "total": float(product.price),
-            "image": product.image.url
-        }
         cart = request.COOKIES.get('cart')
         cart = json.loads(cart) if cart else {}
+
+        if product.stock - 1 < 0 or (str(product_id) in cart and product.stock - cart[str(product_id)]['quantity'] - 1 < 0):
+            messages.error(request, 'Existencias del producto superadas.')
+            return redirect('cart:view_cart')
 
         if str(product_id) in cart:
             cart[str(product_id)]['quantity'] += 1
             cart[str(product_id)]['total'] = round(cart[str(product_id)]['price'] * cart[str(product_id)]['quantity'], 2)
         else:
-            cart[str(product_id)] = product
+            cart[str(product_id)] = {
+                "id": product_id,
+                "name": product.name,
+                "price": float(product.price),
+                "quantity": 1,
+                "total": float(product.price),
+                "image": product.image.url
+            }
 
         response = redirect('cart:view_cart')
         response.set_cookie('cart', json.dumps(cart))
@@ -66,25 +69,29 @@ def add_amount_to_cart(request, product_id, amount):
     except Product.DoesNotExist:
         return redirect('/')
     
-    if product.soldout:
+
+    if product.stock == 0:
         return redirect('/')
     else:
-        product = {
-            "id": product_id,
-            "name": product.name,
-            "price": float(product.price),
-            "quantity": amount,
-            "total": float(round(product.price * amount, 2)),
-            "image": product.image.url
-        }
         cart = request.COOKIES.get('cart')
         cart = json.loads(cart) if cart else {}
+
+        if product.stock - amount < 0 or (str(product_id) in cart and product.stock - cart[str(product_id)]['quantity'] - amount < 0):
+            messages.error(request, 'Existencias del producto superadas.')
+            return redirect('/')
 
         if str(product_id) in cart:
             cart[str(product_id)]['quantity'] += amount
             cart[str(product_id)]['total'] = round(cart[str(product_id)]['price'] * cart[str(product_id)]['quantity'], 2)
         else:
-            cart[str(product_id)] = product
+            cart[str(product_id)] = {
+                "id": product_id,
+                "name": product.name,
+                "price": float(product.price),
+                "quantity": amount,
+                "total": float(round(product.price * amount, 2)),
+                "image": product.image.url
+            }
 
         response = redirect('/')
         response.set_cookie('cart', json.dumps(cart))

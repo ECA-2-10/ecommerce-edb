@@ -23,7 +23,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, validators=[MinValueValidator(0.01)], help_text='El precio debe ser un valor positivo.')
     image = models.ImageField(upload_to='product/images', verbose_name='Imagen')
     maker = models.CharField(max_length=255)
-    soldout = models.BooleanField(default=False)
+    stock = models.IntegerField(validators=[MinValueValidator(0)], help_text='El stock debe ser igual o mayor que cero.')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
