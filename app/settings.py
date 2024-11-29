@@ -24,12 +24,12 @@ environ.Env.read_env()
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-25d63uyh&vqo$)9$-5h&kuksh0!5swpg0j&dhkeuc1_^v(!n1v'
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -153,3 +153,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'edbelectronics210@gmail.com'
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = 'EDB Electronics <edbelectronics210@gmail.com>'
+
+# Static files settings
+STATIC_ROOT = '/static/'
