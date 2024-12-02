@@ -1,0 +1,15 @@
+{% extends 'base-better.html' %}
+
+{% block content %}
+
+<p>Confirmando tu pedido, por favor espera...</p>
+<form id="confirmar-form" method="POST" action="/order/">
+    {% csrf_token %}
+    <input type="hidden" name="order_code" value="{{ order_code }}">
+</form>
+<script>
+    // Enviamos el formulario automáticamente después de cargar la página
+    document.getElementById('confirmar-form').submit();
+</script>
+
+{% endblock %}

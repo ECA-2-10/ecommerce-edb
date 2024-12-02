@@ -45,6 +45,12 @@
             <p><strong>Fecha de entrega estimada:</strong> {{ order.deliveryDate }}</p>
         </div>
 
+        <form action="http://127.0.0.1:8000/order/order-from-email?order_code={{ order.code }}" method="GET" style="display:inline;">
+            {% csrf_token %}
+            <input type="hidden" name="order_code" value="{{ order.code }}">
+            <button type="submit" class="button">Ver Detalles del Pedido</button>
+        </form>
+
         <h2>Productos:</h2>
         <table>
             <tr>

@@ -16,6 +16,21 @@ function updateURLWithDepartment(selectElement) {
     filterProducts();
 }
 
+// Función para actualizar la URL cuando se selecciona un fabricante
+function updateURLWithMaker(selectElement) {
+    const makerName = selectElement.value;
+    const url = new URL(window.location.href);
+
+    if (makerName === 'Todos los fabricantes') {
+        url.searchParams.delete('maker');
+    } else {
+        url.searchParams.set('maker', makerName);
+    }
+
+    window.history.pushState({}, '', url);
+    filterProducts();
+}
+
 // Función para filtrar productos por categoría
 function filterProductsByCategory(categoryName) {
     const url = new URL(window.location.href);
@@ -82,6 +97,7 @@ function performSearch(searchQuery) {
 document.addEventListener('DOMContentLoaded', (event) => {
     const urlParams = new URLSearchParams(window.location.search);
     const department = urlParams.get('department');
+    const maker = urlParams.get('maker');
     const category = urlParams.get('category');
     const searchQuery = urlParams.get('search');
 
@@ -91,6 +107,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     } else {
         // Mostrar todas las categorías si no hay departamento seleccionado
         filterCategoriesByDepartment('Todos los departamentos');
+    }
+
+    if (maker) {
+        document.getElementById('makerSelect').value = maker;
     }
 
     if (category) {
@@ -136,18 +156,24 @@ function filterCategoriesByDepartment(departmentName) {
 function filterProducts() {
     const urlParams = new URLSearchParams(window.location.search);
     const department = urlParams.get('department');
+    const maker = urlParams.get('maker');
     const category = urlParams.get('category');
     const searchQuery = urlParams.get('search') ? urlParams.get('search').toLowerCase() : '';
 
     const productCards = document.querySelectorAll('.product-card');
     productCards.forEach(card => {
         const productDepartment = card.getAttribute('data-department');
+        const productMaker = card.getAttribute('data-maker');
         const productCategory = card.getAttribute('data-category');
         const productName = card.getAttribute('data-name').toLowerCase();
 
         let isVisible = true;
 
         if (department && department !== "Todos los departamentos" && productDepartment !== department) {
+            isVisible = false;
+        }
+
+        if (maker && maker !== "Todos los fabricantes" && productMaker !== maker) {
             isVisible = false;
         }
 
