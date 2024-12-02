@@ -17,3 +17,14 @@ def order_search(request):
             except Order.DoesNotExist:
                 context["error"] = "Order not found."
     return render(request, "order/order_search.html", context)
+
+
+def order_from_email(request):
+    order_code = request.GET.get('order_code')
+    
+    # Renderizamos una página que automáticamente enviará un formulario POST
+    context = {
+        'order_code': order_code,
+    }
+
+    return render(request, 'order/order_from_email.html', context)
