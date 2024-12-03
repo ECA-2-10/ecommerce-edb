@@ -7,6 +7,7 @@ def add_initial_products(apps, schema_editor):
     Product = apps.get_model('product', 'Product')
     Department = apps.get_model('product', 'Department')
     Category = apps.get_model('product', 'Category')
+    todos_productos = []
 
     # Obtener los departamentos
     cocina = Department.objects.get(name='Cocina')
@@ -18,289 +19,45 @@ def add_initial_products(apps, schema_editor):
     almacenamiento = Category.objects.get(department=cocina, name='Almacenamiento de Alimentos')
     otros = Category.objects.get(department=cocina, name='Otros')
 
-    Product.objects.create(
-        name='Refrigerador Samsung Family Hub',
-        description='Refrigerador inteligente con pantalla táctil y conectividad Wi-Fi.',
-        price=2499.99,
-        image='product/images/refrigerador_samsung_family_hub.jpg',
-        maker='Samsung',
-        stock=30,
-        category=electrodomesticos
-    )
-    
-    Product.objects.create(
-        name='Lavavajillas Bosch Serie 6',
-        description='Lavavajillas eficiente con múltiples programas de lavado.',
-        price=899.99,
-        image='product/images/lavavajillas_bosch_serie6.jpg',
-        maker='Bosch',
-        stock=20,
-        category=electrodomesticos
-    )
-    
-    Product.objects.create(
-        name='Horno Microondas LG NeoChef',
-        description='Microondas con tecnología inverter para cocción uniforme.',
-        price=299.99,
-        image='product/images/microondas_lg_neochef.jpg',
-        maker='LG',
-        stock=0,
-        category=electrodomesticos
-    )
-    
-    Product.objects.create(
-        name='Placa de Inducción Teka IIC',
-        description='Placa de inducción de 4 zonas con controles táctiles.',
-        price=499.99,
-        image='product/images/placa_induccion_teka_iic.jpg',
-        maker='Teka',
-        stock=25,
-        category=electrodomesticos
-    )
-    
-    Product.objects.create(
-        name='Extractor de Aire Siemens iQ700',
-        description='Extractor de aire silencioso con sensor de humedad.',
-        price=399.99,
-        image='product/images/extractor_aire_siemens_iq700.jpg',
-        maker='Siemens',
-        stock=15,
-        category=electrodomesticos
-    )
-    
-    # Sección: Utensilios de Cocina
-    Product.objects.create(
-        name='Juego de Cuchillos Global 8 Piezas',
-        description='Set de cuchillos japoneses de alta calidad para cocina profesional.',
-        price=149.99,
-        image='product/images/cuchillos_global_8piezas.jpg',
-        maker='Global',
-        stock=100,
-        category=utensilios
-    )
-    
-    Product.objects.create(
-        name='Sartenes Tefal Titanium',
-        description='Juego de sartenes antiadherentes con tecnología Titanium.',
-        price=129.99,
-        image='product/images/sartenes_tefal_titanium.jpg',
-        maker='Tefal',
-        stock=80,
-        category=utensilios
-    )
-    
-    Product.objects.create(
-        name='Set de Ollas Le Creuset',
-        description='Juego de ollas de hierro fundido esmaltado de alta calidad.',
-        price=599.99,
-        image='product/images/ollas_lecreuset.jpg',
-        maker='Le Creuset',
-        stock=0,
-        category=utensilios
-    )
-    
-    Product.objects.create(
-        name='Batidora KitchenAid Artisan',
-        description='Batidora de pie con múltiples accesorios y colores disponibles.',
-        price=349.99,
-        image='product/images/batidora_kitchenaid_artisan.jpg',
-        maker='KitchenAid',
-        stock=60,
-        category=utensilios
-    )
-    
-    Product.objects.create(
-        name='Tabla de Cortar de Bambú',
-        description='Tabla de cortar ecológica y resistente para todo tipo de alimentos.',
-        price=29.99,
-        image='product/images/tabla_cortar_bambu.jpg',
-        maker='OXO',
-        stock=150,
-        category=utensilios
-    )
-    
-    # Sección: Pequeños Electrodomésticos
-    Product.objects.create(
-        name='Tostadora Philips Daily Collection',
-        description='Tostadora con 6 niveles de tostado y funciones de descongelado.',
-        price=49.99,
-        image='product/images/tostadora_philips_daily.jpg',
-        maker='Philips',
-        stock=70,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Cafetera Nespresso Vertuo',
-        description='Cafetera cápsulas con tecnología de centrifusión para café y espresso.',
-        price=199.99,
-        image='product/images/cafetera_nespresso_vertuo.jpg',
-        maker='Nespresso',
-        stock=55,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Licuadora Vitamix 5200',
-        description='Licuadora de alto rendimiento para smoothies y batidos.',
-        price=449.99,
-        image='product/images/licuadora_vitamix_5200.jpg',
-        maker='Vitamix',
-        stock=35,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Freidora de Aire Philips',
-        description='Freidora de aire saludable con tecnología Rapid Air.',
-        price=299.99,
-        image='product/images/freidora_aire_philips.jpg',
-        maker='Philips',
-        stock=45,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Robot de Cocina Moulinex Companion',
-        description='Robot multifunción para picar, cocinar y amasar.',
-        price=599.99,
-        image='product/images/robot_cocina_moulinex_companion.jpg',
-        maker='Moulinex',
-        stock=25,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Cafetera Espresso DeLonghi Magnifica',
-        description='Máquina de café espresso automática con molinillo integrado.',
-        price=699.99,
-        image='product/images/cafetera_delonghi_magnifica.jpg',
-        maker='DeLonghi',
-        stock=20,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Plancha para Panini Breville',
-        description='Plancha eléctrica para paninis y sándwiches con placas antiadherentes.',
-        price=89.99,
-        image='product/images/plancha_panini_breville.jpg',
-        maker='Breville',
-        stock=65,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Extractor de Jugos Omega J8006',
-        description='Extractor de jugos de alta eficiencia para jugos fríos.',
-        price=349.99,
-        image='product/images/extractor_jugos_omega_j8006.jpg',
-        maker='Omega',
-        stock=30,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Máquina de Hacer Pan Panasonic SD-YD250',
-        description='Máquina automática para hacer pan con múltiples programas.',
-        price=199.99,
-        image='product/images/maquina_pan_panasonic_sdyd250.jpg',
-        maker='Panasonic',
-        stock=40,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Humidificador Philips Series 2000',
-        description='Humidificador ultrasónico con control de humedad y apagado automático.',
-        price=129.99,
-        image='product/images/humidificador_philips_series2000.jpg',
-        maker='Philips',
-        stock=50,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Ventilador de Escritorio Honeywell HT-900E',
-        description='Ventilador compacto y silencioso para uso en cocina.',
-        price=39.99,
-        image='product/images/ventilador_honeywell_ht900e.jpg',
-        maker='Honeywell',
-        stock=100,
-        category=peque_electro
-    )
-    
-    Product.objects.create(
-        name='Calentador de Agua Instantáneo Ariston',
-        description='Calentador de agua sin depósito con rápida provisión de agua caliente.',
-        price=299.99,
-        image='product/images/calentador_agua_ariston.jpg',
-        maker='Ariston',
-        stock=20,
-        category=peque_electro
-    )
-    
-    # Sección: Almacenamiento de Alimentos
-    Product.objects.create(
-        name='Despensa Inteligente SmartStor',
-        description='Sistema de almacenamiento modular con sensores de temperatura.',
-        price=499.99,
-        image='product/images/despensa_inteligente_smartstor.jpg',
-        maker='SmartStor',
-        stock=10,
-        category=almacenamiento
-    )
-    
-    Product.objects.create(
-        name='Contenedores Herméticos Lock&Lock',
-        description='Juego de 20 contenedores plásticos con cierre hermético.',
-        price=59.99,
-        image='product/images/contenedores_locklock.jpg',
-        maker='Lock&Lock',
-        stock=200,
-        category=almacenamiento
-    )
-    
-    Product.objects.create(
-        name='Envasadora al Vacío FoodSaver V4840',
-        description='Máquina de envasado al vacío con múltiples modos de sellado.',
-        price=199.99,
-        image='product/images/envasadora_foodsaver_v4840.jpg',
-        maker='FoodSaver',
-        stock=35,
-        category=almacenamiento
-    )
-    
-    Product.objects.create(
-        name='Refrigerador de Vino Vinotemp 24 Botellas',
-        description='Refrigerador especializado para almacenamiento de vinos con control de temperatura.',
-        price=799.99,
-        image='product/images/refrigerador_vinotemp_24botellas.jpg',
-        maker='Vinotemp',
-        stock=15,
-        category=almacenamiento
-    )
-    
-    # Sección: Otros
-    Product.objects.create(
-        name='Máquina de Hacer Café Moka',
-        description='Máquina de café tradicional italiana para preparar moka pot.',
-        price=49.99,
-        image='product/images/maquina_cafe_moka.jpg',
-        maker='Bialetti',
-        stock=80,
-        category=otros
-    )
-    
-    Product.objects.create(
-        name='Set de Medidores de Cocina OXO',
-        description='Juego de medidores de cocina en acero inoxidable con imán.',
-        price=39.99,
-        image='product/images/medidores_oxo.jpg',
-        maker='OXO',
-        stock=120,
-        category=otros
-    )
+    prod_cocina = [('Refrigerador Samsung Family Hub','Refrigerador inteligente con pantalla táctil y conectividad Wi-Fi.',2499.99,'product/images/refrigerador_samsung_family_hub.jpg','Samsung',30,electrodomesticos),    
+                    ('Lavavajillas Bosch Serie 6','Lavavajillas eficiente con múltiples programas de lavado.',899.99,'product/images/lavavajillas_bosch_serie6.jpg','Bosch',20,electrodomesticos),    
+                    ('Horno Microondas LG NeoChef','Microondas con tecnología inverter para cocción uniforme.',299.99,'product/images/microondas_lg_neochef.jpg','LG',0,electrodomesticos),    
+                    ('Placa de Inducción Teka IIC','Placa de inducción de 4 zonas con controles táctiles.',499.99,'product/images/placa_induccion_teka_iic.jpg','Teka',25,electrodomesticos),    
+                    ('Extractor de Aire Siemens iQ700','Extractor de aire silencioso con sensor de humedad.',399.99,'product/images/extractor_aire_siemens_iq700.jpg','Siemens',15,electrodomesticos),    
+
+                    ('Juego de Cuchillos Global 8 Piezas','Set de cuchillos japoneses de alta calidad para cocina profesional.',149.99,'product/images/cuchillos_global_8piezas.jpg','Global',100,utensilios),    
+                    ('Sartenes Tefal Titanium','Juego de sartenes antiadherentes con tecnología Titanium.',129.99,'product/images/sartenes_tefal_titanium.jpg','Tefal',80,utensilios),    
+                    ('Set de Ollas Le Creuset','Juego de ollas de hierro fundido esmaltado de alta calidad.',599.99,'product/images/ollas_lecreuset.jpg','Le Creuset',0,utensilios),    
+                    ('Batidora KitchenAid Artisan','Batidora de pie con múltiples accesorios y colores disponibles.',349.99,'product/images/batidora_kitchenaid_artisan.jpg','KitchenAid',60,utensilios),    
+                    ('Tabla de Cortar de Bambú','Tabla de cortar ecológica y resistente para todo tipo de alimentos.',29.99,'product/images/tabla_cortar_bambu.jpg','OXO',150,utensilios),    
+
+                    ('Tostadora Philips Daily Collection','Tostadora con 6 niveles de tostado y funciones de descongelado.',49.99,'product/images/tostadora_philips_daily.jpg','Philips',70,peque_electro),    
+                    ('Cafetera Nespresso Vertuo','Cafetera cápsulas con tecnología de centrifusión para café y espresso.',199.99,'product/images/cafetera_nespresso_vertuo.jpg','Nespresso',55,peque_electro),    
+                    ('Licuadora Vitamix 5200','Licuadora de alto rendimiento para smoothies y batidos.',449.99,'product/images/licuadora_vitamix_5200.jpg','Vitamix',35,peque_electro),    
+                    ('Freidora de Aire Philips','Freidora de aire saludable con tecnología Rapid Air.',299.99,'product/images/freidora_aire_philips.jpg','Philips',45,peque_electro),    
+                    ('Robot de Cocina Moulinex Companion','Robot multifunción para picar, cocinar y amasar.',599.99,'product/images/robot_cocina_moulinex_companion.jpg','Moulinex',25,peque_electro),    
+                    ('Cafetera Espresso DeLonghi Magnifica','Máquina de café espresso automática con molinillo integrado.',699.99,'product/images/cafetera_delonghi_magnifica.jpg','DeLonghi',20,peque_electro),    
+                    ('Plancha para Panini Breville','Plancha eléctrica para paninis y sándwiches con placas antiadherentes.',89.99,'product/images/plancha_panini_breville.jpg','Breville',65,peque_electro),    
+                    ('Extractor de Jugos Omega J8006','Extractor de jugos de alta eficiencia para jugos fríos.',349.99,'product/images/extractor_jugos_omega_j8006.jpg','Omega',30,peque_electro),    
+                    ('Máquina de Hacer Pan Panasonic SD-YD250','Máquina automática para hacer pan con múltiples programas.',199.99,'product/images/maquina_pan_panasonic_sdyd250.jpg','Panasonic',40,peque_electro),    
+                    ('Humidificador Philips Series 2000','Humidificador ultrasónico con control de humedad y apagado automático.',129.99,'product/images/humidificador_philips_series2000.jpg','Philips',50,peque_electro),    
+                    ('Ventilador de Escritorio Honeywell HT-900E','Ventilador compacto y silencioso para uso en cocina.',39.99,'product/images/ventilador_honeywell_ht900e.jpg','Honeywell',100,peque_electro),    
+                    ('Calentador de Agua Instantáneo Ariston','Calentador de agua sin depósito con rápida provisión de agua caliente.',299.99,'product/images/calentador_agua_ariston.jpg','Ariston',20,peque_electro),    
+
+                    ('Despensa Inteligente SmartStor','Sistema de almacenamiento modular con sensores de temperatura.',499.99,'product/images/despensa_inteligente_smartstor.jpg','SmartStor',10,almacenamiento),    
+                    ('Contenedores Herméticos Lock&Lock','Juego de 20 contenedores plásticos con cierre hermético.',59.99,'product/images/contenedores_locklock.jpg','Lock&Lock',200,almacenamiento),    
+                    ('Envasadora al Vacío FoodSaver V4840','Máquina de envasado al vacío con múltiples modos de sellado.',199.99,'product/images/envasadora_foodsaver_v4840.jpg','FoodSaver',35,almacenamiento),    
+                    ('Refrigerador de Vino Vinotemp 24 Botellas','Refrigerador especializado para almacenamiento de vinos con control de temperatura.',799.99,'product/images/refrigerador_vinotemp_24botellas.jpg','Vinotemp',15,almacenamiento),    
+
+                    ('Máquina de Hacer Café Moka','Máquina de café tradicional italiana para preparar moka pot.',49.99,'product/images/maquina_cafe_moka.jpg','Bialetti',80,otros),    
+                    ('Set de Medidores de Cocina OXO','Juego de medidores de cocina en acero inoxidable con imán.',39.99,'product/images/medidores_oxo.jpg','OXO',120,otros)]
+
+    # Añadir todos los productos
+    todos_productos.extend(prod_cocina)
+
+    for name, description, price, image, maker, stock, category in todos_productos:
+        Product.objects.create(name=name, description=description, price=price, image=image, maker=maker, stock=stock, category=category)
+
 
 class Migration(migrations.Migration):
 
