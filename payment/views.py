@@ -117,10 +117,9 @@ def generate_unique_code():
         if not Order.objects.filter(code=code).exists():
             return code
 
-def send_order_email(request, order, cart):
+def send_order_email(order, cart):
     subject = f'Pedido EDB Electronics - {order.code}'
     html_message = render_to_string('order_email.html', {
-        'order_url': request.build_absolute_uri(f"/order/order-from-email?order_code={order.code}"),
         'order': order,
         'cart': cart,
         'payment_method': 'Pago contra reembolso' if order.paymentMethod == Order.ON_DELIVERY else 'Tarjeta de crédito'
@@ -164,7 +163,7 @@ def payment_success(request):
         product.stock -= item['quantity']
         Product.save(product)
     
-    send_order_email(request, order, cart)
+    send_order_email(order, cart)
     
     context = {
         'cart': cart,

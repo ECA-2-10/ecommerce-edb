@@ -45,12 +45,6 @@
             <p><strong>Fecha de entrega estimada:</strong> {{ order.deliveryDate }}</p>
         </div>
 
-        <form action="{{ order_url }}" method="GET" style="display:inline;">
-            {% csrf_token %}
-            <input type="hidden" name="order_code" value="{{ order.code }}">
-            <button type="submit" class="button">Ver Detalles del Pedido</button>
-        </form>
-
         <h2>Productos:</h2>
         <table>
             <tr>
