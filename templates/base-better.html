@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EDB Electronics</title>
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <!-- Bootstrap CSS -->
@@ -29,7 +30,14 @@
             </a>
             {% if request.resolver_match.url_name == "home" %}
             <section class="d-flex">
-                <select class="form-select rounded-end-0" id="departmentSelect"
+                <select class="form-select rounded-end-0" id="makerSelect"
+                    onchange="updateURLWithMaker(this)">
+                    <option value="Todos los fabricantes" selected>Todos los fabricantes</option>
+                    {% for maker in makers %}
+                    <option value="{{ maker.maker }}">{{ maker.maker }}</option>
+                    {% endfor %}
+                </select>
+                <select class="form-select rounded-0" id="departmentSelect"
                     onchange="updateURLWithDepartment(this)">
                     <option value="Todos los departamentos" selected>Todos los departamentos</option>
                     {% for department in departments %}
@@ -77,7 +85,6 @@
             </section>
         </nav>
     </header>
-
     <main>
         {% block content %}
         <!-- Contenido específico de cada página -->
