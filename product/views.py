@@ -17,10 +17,8 @@ def product_list(request):
     if department_name and department_name != "Todos los departamentos":
         products = products.filter(category__department__name=department_name)
 
-    #print(f'"{request.GET}"')
     if maker_name and maker_name != "Todos los fabricantes":
         products = products.filter(maker__icontains=maker_name)
-        print(products)
     
     if search_query:
         products = products.filter(name__icontains=search_query)
@@ -29,7 +27,6 @@ def product_list(request):
     departments = Department.objects.all()
     makers = Product.objects.values('maker').distinct()
 
-    print(products)
     context = {
         'products': products,
         'categories': categories,
