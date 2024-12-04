@@ -12,13 +12,10 @@ def add_initial_categories(apps, schema_editor):
         'Cocina': ['Electrodomesticos', 'Utensilios de Cocina', 'Pequeños Electrodomésticos', 'Almacenamiento de Alimentos', 'Otros'],
         'Electrónica': ['Audio y Sonido', 'Televisores y Video'],
         'Hogar': ['Muebles', 'Decoración'],
-        'Jardinería': ['Herramientas de Jardín', 'Plantas y Semillas'],
-        'Ropa': ['Hombre', 'Mujer'],
+        'Jardinería': ['Herramientas de Jardín'],
         'Deportes': ['Fitness', 'Outdoor'],
-        'Belleza': ['Cuidado de la Piel', 'Maquillaje'],
-        'Juguetes': ['Niños', 'Educativos'],
         'Oficina': ['Equipos de Oficina', 'Suministros'],
-        'Salud': ['Medicamentos', 'Equipos Médicos']
+        'Salud': ['Equipos Médicos']
     }
 
     # Iterar sobre los departamentos y secciones para crear las categorías
