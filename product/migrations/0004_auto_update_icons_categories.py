@@ -9,10 +9,7 @@ def add_icons_to_departments(apps, schema_editor):
         'Electrónica': 'fas fa-tv',
         'Hogar': 'fas fa-couch',
         'Jardinería': 'fas fa-seedling',
-        'Ropa': 'fas fa-tshirt',
         'Deportes': 'fas fa-dumbbell',
-        'Belleza': 'fas fa-spa',
-        'Juguetes': 'fas fa-puzzle-piece',
         'Oficina': 'fas fa-briefcase',
         'Salud': 'fas fa-heartbeat',
     }
